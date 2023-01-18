@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@next/font": "13.1.2",
+    "@supabase/supabase-js": "^2.4.0",
+    "@tailwindcss/forms": "^0.5.3",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.10",
@@ -19,5 +21,16 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "4.9.4"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "cz-conventional-changelog": "^3.3.0",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
