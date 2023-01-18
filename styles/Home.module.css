@@ -41,17 +41,20 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(25%, auto));
+  grid-template-columns: repeat(6, minmax(13%, auto));
   width: var(--max-width);
   max-width: 100%;
 }
 
 .card {
-  padding: 1rem 1.2rem;
+  padding: 1.2rem 1.2rem;
+  align-self: center;
   border-radius: var(--border-radius);
   background: rgba(var(--card-rgb), 0);
   border: 1px solid rgba(var(--card-border-rgb), 0);
   transition: background 200ms, border 200ms;
+  background: rgba(var(--card-rgb), 0.1);
+  border: 1px solid rgba(var(--card-border-rgb), 0.15);
 }
 
 .card span {
@@ -61,7 +64,6 @@
 
 .card h2 {
   font-weight: 600;
-  margin-bottom: 0.7rem;
 }
 
 .card p {
@@ -154,8 +156,8 @@
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
-    background: rgba(var(--card-rgb), 0.1);
-    border: 1px solid rgba(var(--card-border-rgb), 0.15);
+    background: rgba(var(--card-rgb), 0.2);
+    border: 1px solid rgba(var(--card-border-rgb), 0.25);
   }
 
   .card:hover span {
@@ -227,7 +229,7 @@
     border: none;
     border-bottom: 1px solid rgba(var(--callout-border-rgb), 0.25);
     background: linear-gradient(
-      to bottom,
+      to top,
       rgba(var(--background-start-rgb), 1),
       rgba(var(--callout-rgb), 0.5)
     );
@@ -242,8 +244,8 @@
     padding: 2rem;
     height: 200px;
     background: linear-gradient(
-      to bottom,
-      transparent 0%,
+      to top,
+      transparent 20%,
       rgb(var(--background-end-rgb)) 40%
     );
     z-index: 1;
@@ -259,12 +261,11 @@
 
 @media (prefers-color-scheme: dark) {
   .vercelLogo {
-    filter: invert(1);
+    filter: invert(2);
   }
-
   .logo,
   .thirteen img {
-    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
+    filter: invert(1) drop-shadow(0 0 0.8rem #ffffff70);
   }
 }
 

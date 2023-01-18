@@ -1,23 +1,24 @@
+import { useRouter } from "next/router"
 import React, { useState } from 'react'
 import Image from "next/image"
 import { supabase } from '@/utils/supabaseClient'
 
-const SignUp = () => {
+const Login = () => {
   const [email, setEmail] = useState<string | undefined>()
   const [password, setPassword] = useState<string | undefined>()
+  const router = useRouter()
 
-  async function signUpWithEmail() {
+  async function signInWithEmail() {
     try {
       if (email && password) {
-        const response = await supabase.auth.signUp(
+        const response = await supabase.auth.signInWithPassword(
           {
             email: email,
             password: password
           }
         )
         if (response.error) throw response.error
-        const userId = response.data.user?.id;
-        console.log(userId)
+        router.push("/")
       }
 
     } catch {
@@ -47,7 +48,7 @@ const SignUp = () => {
             <div className="mb-4 text-lg">
               <input className="rounded-3xl border-none bg-black bg-opacity-50 px-6 py-3 text-center text-inherit placeholder-gray-500 shadow-lg outline-none backdrop-blur-md" type="password" name="password" id='password' placeholder="password" onChange={(event) => setPassword(event.target.value)} />
             </div>
-            <button type="button" className="mt-4 self-center border border-gray-400 rounded-3xl bg-black bg-opacity-50 px-10 py-2 text-white backdrop-blur-md transition-colors duration-300 hover:bg-zinc-800" onClick={signUpWithEmail}>Sign up</button>
+            <button type="button" className="mt-4 self-center border border-gray-400 rounded-3xl bg-black bg-opacity-50 px-10 py-2 text-white backdrop-blur-md transition-colors duration-300 hover:bg-zinc-800" onClick={signInWithEmail}>Login</button>
           </form>
         </div>
       </div >
@@ -55,4 +56,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp 
+export default Login 

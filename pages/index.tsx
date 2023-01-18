@@ -2,10 +2,72 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
+import { useEffect, useState } from 'react'
+import { supabase } from '@/utils/supabaseClient'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const [isAuth, setIsAuth] = useState<boolean>(false)
+  const [userId, setUserId] = useState<string | undefined>()
+  const [title, setTitle] = useState<string | undefined>()
+  const [desc, setDesc] = useState<string | undefined>()
+  const [url, setUrl] = useState<string | undefined>()
+
+
+
+
+  useEffect(() => {
+    const getUser = async () => {
+      const user = await supabase.auth.getUser()
+      if (user) {
+        const userLoginId = user.data.user?.id
+        setIsAuth(true)
+        setUserId(userLoginId)
+
+      }
+    }
+
+    getUser()
+
+  }, [])
+
+  useEffect(() => {
+    const getLinks = async () => {
+      try {
+        const { data, error } = await supabase.from("links").select().eq("user_id", userId);
+        if (error) throw error
+        console.log("data from db: ", data)
+      } catch (error) {
+        console.log("error", error)
+      }
+    }
+
+    if (userId) {
+      getLinks()
+    }
+
+
+  }, [userId])
+  const addNewLink = async () => {
+    try {
+      if (title && desc && url) {
+        const { data, error } = await supabase.from("links").insert({
+          title: title,
+          description: desc,
+          url: url,
+          user_id: userId
+        }).select()
+        if (error) throw error;
+        console.log('data: ', data)
+      }
+    } catch (error) {
+      console.log("error: ", error)
+    }
+
+  }
+
+
   return (
     <>
       <Head>
@@ -17,8 +79,8 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.description}>
           <p className='text-slate-700'>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.tsx</code>
+            Get started by adding new links&nbsp;
+            <code className={styles.code}>Terrnit</code>
           </p>
           <div>
             <a
@@ -40,83 +102,44 @@ export default function Home() {
         </div>
 
         <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
+          <h1 className='text-white text-2xl font-bold'>
+
+            Welcome to Monolink
+          </h1>
           <div className={styles.thirteen}>
             <Image
-              src="/thirteen.svg"
-              alt="13"
+              src="/monolink.svg"
+              alt="monolink logo"
               width={40}
               height={31}
               priority
             />
           </div>
         </div>
+        {isAuth && (
 
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
 
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
+          <div className='flex flex-col'>
+            <div className="mb-4 text-lg">
+              <input className="rounded-3xl bg-black bg-opacity-50 border-slate-500 px-6 py-3 text-center text-inherit placeholder-gray-500 shadow-lg outline-none backdrop-blur-md" type="text" name="title" id='title' placeholder="give a title" onChange={(event) => setTitle(event.target.value)} />
+            </div>
 
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
+            <div className="mb-4 text-lg">
+              <input className="rounded-3xl bg-black bg-opacity-50 border-slate-500 px-6 py-3 text-center text-inherit placeholder-gray-500 shadow-lg outline-none backdrop-blur-md" type="text" name="description" id='desc' placeholder="give some description" onChange={(event) => setDesc(event.target.value)} />
+            </div>
+            <div className="mb-4 text-lg">
+              <input className="rounded-3xl border-slate-500 bg-black bg-opacity-50 px-6 py-3 text-center text-inherit placeholder-gray-500 shadow-lg outline-none backdrop-blur-md" type="text" name="url" id='url' placeholder="link url" onChange={(event) => setUrl(event.target.value)} />
+            </div>
+            <button
+              onClick={addNewLink}
+              className={styles.card}
+            >
+              <h2 className={inter.className}>
+                Add link
+              </h2>
+            </button>
+          </div>
+        )}
       </main>
     </>
   )
