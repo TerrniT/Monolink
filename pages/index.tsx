@@ -4,8 +4,11 @@ import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import { useEffect, useState } from 'react'
 import { supabase } from '@/utils/supabaseClient'
+import { LinkDef } from '@/types'
+import Card from '@/components/cardlink'
 
 const inter = Inter({ subsets: ['latin'] })
+
 
 export default function Home() {
   const [isAuth, setIsAuth] = useState<boolean>(false)
@@ -13,6 +16,7 @@ export default function Home() {
   const [title, setTitle] = useState<string | undefined>()
   const [desc, setDesc] = useState<string | undefined>()
   const [url, setUrl] = useState<string | undefined>()
+  const [links, setLinks] = useState<LinkDef[]>()
 
 
 
@@ -24,7 +28,6 @@ export default function Home() {
         const userLoginId = user.data.user?.id
         setIsAuth(true)
         setUserId(userLoginId)
-
       }
     }
 
@@ -35,8 +38,9 @@ export default function Home() {
   useEffect(() => {
     const getLinks = async () => {
       try {
-        const { data, error } = await supabase.from("links").select().eq("user_id", userId);
+        const { data, error } = await supabase.from("links").select("id, title, description, url").eq("user_id", userId);
         if (error) throw error
+        setLinks(data)
         console.log("data from db: ", data)
       } catch (error) {
         console.log("error", error)
@@ -77,29 +81,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div className={styles.description}>
-          <p className='text-slate-700'>
-            Get started by adding new links&nbsp;
-            <code className={styles.code}>Terrnit</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
-        </div>
 
         <div className={styles.center}>
           <h1 className='text-white text-2xl font-bold'>
@@ -116,19 +97,18 @@ export default function Home() {
             />
           </div>
         </div>
+
         {isAuth && (
-
-
           <div className='flex flex-col'>
             <div className="mb-4 text-lg">
-              <input className="rounded-3xl bg-black bg-opacity-50 border-slate-500 px-6 py-3 text-center text-inherit placeholder-gray-500 shadow-lg outline-none backdrop-blur-md" type="text" name="title" id='title' placeholder="give a title" onChange={(event) => setTitle(event.target.value)} />
+              <input className="rounded-2xl bg-black bg-opacity-50 border-slate-500 px-6 py-3 text-inherit placeholder-gray-500 shadow-lg outline-none backdrop-blur-md" type="text" name="title" id='title' placeholder="Title" onChange={(event) => setTitle(event.target.value)} />
             </div>
 
             <div className="mb-4 text-lg">
-              <input className="rounded-3xl bg-black bg-opacity-50 border-slate-500 px-6 py-3 text-center text-inherit placeholder-gray-500 shadow-lg outline-none backdrop-blur-md" type="text" name="description" id='desc' placeholder="give some description" onChange={(event) => setDesc(event.target.value)} />
+              <input className="rounded-2xl bg-black bg-opacity-50 border-slate-500 px-6 py-3  text-inherit placeholder-gray-500 shadow-lg outline-none backdrop-blur-md" type="text" name="description" id='desc' placeholder="Description" onChange={(event) => setDesc(event.target.value)} />
             </div>
             <div className="mb-4 text-lg">
-              <input className="rounded-3xl border-slate-500 bg-black bg-opacity-50 px-6 py-3 text-center text-inherit placeholder-gray-500 shadow-lg outline-none backdrop-blur-md" type="text" name="url" id='url' placeholder="link url" onChange={(event) => setUrl(event.target.value)} />
+              <input className="rounded-2xl border-slate-500 bg-black bg-opacity-50 px-6 py-3  text-inherit placeholder-gray-500 shadow-lg outline-none backdrop-blur-md" type="text" name="url" id='url' placeholder="https://..." onChange={(event) => setUrl(event.target.value)} />
             </div>
             <button
               onClick={addNewLink}
@@ -140,6 +120,14 @@ export default function Home() {
             </button>
           </div>
         )}
+        <div className='flex flex-row mt-4 p-4 gap-4'>
+          {
+            links?.map((link: LinkDef) => (
+              <Card id={link.id} title={link.title} description={link.description} url={link.url} />
+            ))
+          }
+
+        </div>
       </main>
     </>
   )
