@@ -201,6 +201,18 @@
   "resolved" "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.2.0.tgz"
   "version" "1.2.0"
 
+"@supabase/auth-helpers-nextjs@^0.5.3":
+  "integrity" "sha512-imfHiTtV73AgMY/hvfDMHLARRC3ep0Hf+pq5l1zxWakIPQPvWXoad3fqpIE3kl7XJ05vnZMKZP0aMp9RtXAESg=="
+  "resolved" "https://registry.npmjs.org/@supabase/auth-helpers-nextjs/-/auth-helpers-nextjs-0.5.3.tgz"
+  "version" "0.5.3"
+  dependencies:
+    "@supabase/auth-helpers-shared" "0.2.4"
+
+"@supabase/auth-helpers-shared@0.2.4":
+  "integrity" "sha512-c+hi3N6DhjPTzjXGOokre4gmMZOqt0f1ORrwZwi2s07pk3cbkmn77DwwVtlYMNi3oZNYRQqAfxJu83UzpJrrmg=="
+  "resolved" "https://registry.npmjs.org/@supabase/auth-helpers-shared/-/auth-helpers-shared-0.2.4.tgz"
+  "version" "0.2.4"
+
 "@supabase/functions-js@^2.0.0":
   "integrity" "sha512-ozb7bds2yvf5k7NM2ZzUkxvsx4S4i2eRKFSJetdTADV91T65g4gCzEs9L3LUXSrghcGIkUaon03VPzOrFredqg=="
   "resolved" "https://registry.npmjs.org/@supabase/functions-js/-/functions-js-2.0.0.tgz"
@@ -237,7 +249,7 @@
   dependencies:
     "cross-fetch" "^3.1.5"
 
-"@supabase/supabase-js@^2.4.0":
+"@supabase/supabase-js@^2.0.4", "@supabase/supabase-js@^2.4.0":
   "integrity" "sha512-fouVDoTcxM4/xEsh2iaR0wr0liwER7Pth8pvmbqqm7JVDLd2Z3+ie+k9fesg0OAd8VR1plOi80gdjxYm/ZIYMA=="
   "resolved" "https://registry.npmjs.org/@supabase/supabase-js/-/supabase-js-2.4.0.tgz"
   "version" "2.4.0"

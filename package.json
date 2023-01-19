@@ -24,6 +24,7 @@
     "typescript": "4.9.4"
   },
   "devDependencies": {
+    "@supabase/auth-helpers-nextjs": "^0.5.3",
     "autoprefixer": "^10.4.13",
     "cz-conventional-changelog": "^3.3.0",
     "postcss": "^8.4.21",
