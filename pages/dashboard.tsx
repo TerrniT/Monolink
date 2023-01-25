@@ -117,7 +117,7 @@ export default function Dashboard() {
               </div>
               <div className='self-center flex flex-col gap-4'>
                 <Button label="Add link" onClick={addNewLink} />
-                <Button label="Sign Out" onClick={() => supabase.auth.signOut()} />
+                <button onClick={() => supabase.auth.signOut()} className='btn border border-slate-400 rounded-xl py-2 px-4 backdrop-blur-lg filter bg-transparent hover:border-zinc-600 hover:text-gray-800 transition-all duration-150 text-sm'>Add Link</button>
               </div>
             </div>
           )}

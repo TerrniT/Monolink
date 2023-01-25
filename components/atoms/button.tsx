@@ -7,8 +7,10 @@ interface ButtonProps extends React.ComponentProps<"button"> {
 const Button: React.FC<ButtonProps> = ({ label, onClick }) => {
   return (
     <button
+      className=
+      'border border-slate-400 rounded-xl py-2 px-4 backdrop-blur-lg filter bg-transparent hover:border-zinc-600 hover:text-gray-800 transition-all duration-150 text-sm'
+
       onClick={onClick}
-      className="text-white border border-slate-400 rounded-xl py-2 px-4 backdrop-blur-lg filter bg-transparent hover:border-zinc-600 hover:text-gray-800 transition-all duration-150 text-sm"
     >
       {label}
     </button>
