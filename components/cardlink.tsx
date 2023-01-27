@@ -3,11 +3,14 @@ import Image from "next/image";
 import { LinkDef } from "@/types";
 import Link from "next/link";
 // @ts-ignore
-import faviconFetch from 'favicon-fetch'
+import faviconFetch from "favicon-fetch";
 
 const Card = ({ id, title, description, url }: LinkDef) => {
   return (
-    <div key={id} className="relative  bg-black/30 w-[21rem] mx-auto rounded-2xl shadow-1xl ring-1 ring-white/10 ">
+    <div
+      key={id}
+      className="relative bg-black/30 w-[21rem] rounded-2xl shadow-1xl ring-1 ring-white/10 "
+    >
       <div className="relative z-10 flex flex-col justify-between h-full divide-y divide-white/10 ">
         <div className="flex justify-between items-center px-6">
           <div className="w-full">
@@ -16,8 +19,8 @@ const Card = ({ id, title, description, url }: LinkDef) => {
               <div className="relative flex-shrink-0 w-8 h-8 flex ">
                 <a
                   href={url}
+                  rel="noreferrer"
                   target="_blank"
-                  rel="noopener"
                   className="block self-center"
                 >
                   <Image

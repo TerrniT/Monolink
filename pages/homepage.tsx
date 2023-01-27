@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { useState, useEffect } from "react";
 import {
   BsPlus,
@@ -18,6 +17,11 @@ import { FaCog } from "react-icons/fa";
 
 import { motion, useAnimation } from "framer-motion";
 import Image from "next/image";
+import { supabase } from "@/utils/supabaseClient";
+import { LinkDef } from "@/types";
+import Card from "@/components/cardlink";
+import Modal from "@/components/modal";
+import { useModalStore } from "@/store/store";
 
 const data = [
   {
@@ -90,9 +94,77 @@ const datafooter = [
 
 export default function Home() {
   const [active, setActive] = useState(false);
+  const [userId, setUserId] = useState<string | undefined>();
+  const [title, setTitle] = useState<string | undefined>();
+  const [desc, setDesc] = useState<string | undefined>();
+  const [url, setUrl] = useState<string | undefined>();
+  const [links, setLinks] = useState<LinkDef[]>();
+
+  const { setOpen } = useModalStore((state) => ({
+    setOpen: state.setOpen,
+  }));
+
+  const [isAuth, setIsAuth] = useState<boolean>(false);
+
   const controls = useAnimation();
   const controlText = useAnimation();
   const controlTitleText = useAnimation();
+
+  const addNewLink = async () => {
+    try {
+      if (title && desc && url) {
+        const { data, error } = await supabase
+          .from("links")
+          .insert({
+            title: title,
+            description: desc,
+            url: url,
+            user_id: userId,
+          })
+          .select();
+        if (error) throw error;
+        console.log("data: ", data);
+      }
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
+  useEffect(() => {
+    const getUser = async () => {
+      const user = await supabase.auth.getUser();
+      try {
+        if (user) {
+          const userLoginId = user.data.user?.id;
+          setIsAuth(true);
+          setUserId(userLoginId);
+        }
+      } catch (error) {
+        console.log("error on load user", error);
+      }
+    };
+    getUser();
+  }, []);
+
+  useEffect(() => {
+    const getLinks = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("links")
+          .select("id, title, description, url")
+          .eq("user_id", userId);
+        if (error) throw error;
+        setLinks(data);
+        console.log("data from db: ", data);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+
+    if (userId) {
+      getLinks();
+    }
+  }, [userId]);
 
   const showMore = () => {
     controls.start({
@@ -230,15 +302,31 @@ export default function Home() {
 
       <motion.div className="animate duration-300 flex-1 flex-col bg-zinc-900  min-h-screen ">
         <motion.div className="animate duration-300 flex-1 border-b-2 border-zinc-900 bg-black flex flex-col h-24">
-          <button
-            title="Add link"
-            className="flex items-center justify-center self-end my-auto w-auto px-3 py-2 mr-6 font-bold text-black bg-green-400 rounded-lg"
-          >
-            <BsPlus className="text-2xl" />
-          </button>
+          <Modal />
+          {isAuth && (
+            <button
+              title="Add link"
+              onClick={setOpen}
+              className="flex items-center justify-center self-end my-auto w-auto px-3 py-2 mr-6 font-bold text-black bg-green-400 rounded-lg"
+            >
+              <BsPlus className="text-2xl" />
+            </button>
+          )}
         </motion.div>
 
-        <motion.div className="animate duration-300 flex-1  bg-zinc-900 "></motion.div>
+        <motion.div className="animate duration-300 flex-1  bg-zinc-900 ">
+          <div className="flex p-1 gap-2 flex-wrap w-full">
+            {links?.map((link: LinkDef) => (
+              <Card
+                key={link.id}
+                id={link.id}
+                title={link.title}
+                description={link.description}
+                url={link.url}
+              />
+            ))}
+          </div>
+        </motion.div>
       </motion.div>
     </div>
   );

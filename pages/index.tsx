@@ -70,8 +70,7 @@ const Home = () => {
                 title=""
                 className="text-base font-medium text-white transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
               >
-                {" "}
-                Features{" "}
+                Features
               </a>
 
               <a
@@ -79,8 +78,7 @@ const Home = () => {
                 title=""
                 className="text-base font-medium text-white transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
               >
-                {" "}
-                Pricing{" "}
+                Pricing
               </a>
 
               <a
@@ -88,8 +86,7 @@ const Home = () => {
                 title=""
                 className="text-base font-medium text-white transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
               >
-                {" "}
-                Automation{" "}
+                Automation
               </a>
             </div>
 
@@ -107,8 +104,7 @@ const Home = () => {
                   title=""
                   className="flex items-center p-3 -m-3 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:bg-gray-50 focus:outline-none font-pj focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
                 >
-                  {" "}
-                  Features{" "}
+                  Features
                 </a>
 
                 <a
@@ -116,8 +112,7 @@ const Home = () => {
                   title=""
                   className="flex items-center p-3 -m-3 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:bg-gray-50 focus:outline-none font-pj focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
                 >
-                  {" "}
-                  Pricing{" "}
+                  Pricing
                 </a>
 
                 <a
@@ -125,8 +120,7 @@ const Home = () => {
                   title=""
                   className="flex items-center p-3 -m-3 text-base font-medium text-gray-900 transition-all duration-200 rounded-xl hover:bg-gray-50 focus:outline-none font-pj focus:ring-1 focus:ring-gray-900 focus:ring-offset-2"
                 >
-                  {" "}
-                  Automation{" "}
+                  Automation
                 </a>
 
                 <Button label="Sign Up" onClick={() => router.push("/login")} />
@@ -157,10 +151,12 @@ const Home = () => {
             <div className="absolute inset-0 h-2/3 bg-zinc-900"></div>
             <div className="relative mx-auto">
               <div className="lg:max-w-6xl lg:mx-auto">
-                <img
+                <Image
+                  width={100}
+                  height={100}
                   className="transform scale-110"
                   src="https://cdn.rareblocks.xyz/collection/clarity/images/hero/2/illustration.png"
-                  alt=""
+                  alt="illustration"
                 />
               </div>
             </div>
@@ -267,8 +263,7 @@ const Home = () => {
                     title=""
                     className="flex text-base text-white transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
-                    {" "}
-                    About{" "}
+                    About
                   </a>
                 </li>
 
@@ -278,8 +273,7 @@ const Home = () => {
                     title=""
                     className="flex text-base text-white transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
-                    {" "}
-                    Features{" "}
+                    Features
                   </a>
                 </li>
 
@@ -289,8 +283,7 @@ const Home = () => {
                     title=""
                     className="flex text-base text-white transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
-                    {" "}
-                    Works{" "}
+                    Works
                   </a>
                 </li>
 
@@ -300,8 +293,7 @@ const Home = () => {
                     title=""
                     className="flex text-base text-white transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
-                    {" "}
-                    Career{" "}
+                    Career
                   </a>
                 </li>
               </ul>
@@ -319,8 +311,7 @@ const Home = () => {
                     title=""
                     className="flex text-base text-white transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
-                    {" "}
-                    Customer Support{" "}
+                    Customer Support
                   </a>
                 </li>
 
@@ -330,8 +321,7 @@ const Home = () => {
                     title=""
                     className="flex text-base text-white transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
-                    {" "}
-                    Delivery Details{" "}
+                    Delivery Details
                   </a>
                 </li>
 
@@ -341,8 +331,7 @@ const Home = () => {
                     title=""
                     className="flex text-base text-white transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
-                    {" "}
-                    Terms & Conditions{" "}
+                    Terms & Conditions
                   </a>
                 </li>
 
@@ -352,8 +341,7 @@ const Home = () => {
                     title=""
                     className="flex text-base text-white transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
                   >
-                    {" "}
-                    Privacy Policy{" "}
+                    Privacy Policy
                   </a>
                 </li>
               </ul>
