@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
     const checkSession = async () => {
       const { data } = await supabase.auth.getSession();
       if (data.session) {
-        router.push("/homepage");
+        router.push("/");
       }
     };
     checkSession();
@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   supabase.auth.onAuthStateChange((event) => {
     if (event == "SIGNED_IN") {
-      router.push("/homepage");
+      router.push("/");
     }
   });
 

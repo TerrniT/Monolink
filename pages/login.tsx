@@ -17,14 +17,12 @@ const Login = () => {
           password: password,
         });
         if (response.error) throw response.error;
-        router.push("/homepage");
+        router.push("/");
       }
     } catch (error) {
       console.log(error);
     }
   }
-
-  
 
   return (
     <div className="flex h-screen w-full items-center justify-center bg-zinc-800">
