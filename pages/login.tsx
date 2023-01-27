@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Image from "next/image";
 import { supabase } from "@/utils/supabaseClient";
+import { useUser } from "@supabase/auth-helpers-react";
 
 const Login = () => {
   const [email, setEmail] = useState<string | undefined>();
@@ -22,6 +23,8 @@ const Login = () => {
       console.log(error);
     }
   }
+
+  
 
   return (
     <div className="flex h-screen w-full items-center justify-center bg-zinc-800">

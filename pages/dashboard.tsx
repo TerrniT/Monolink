@@ -1,79 +1,76 @@
-
-import Head from 'next/head'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import { supabase } from '@/utils/supabaseClient'
-import { LinkDef } from '@/types'
-import Card from '@/components/cardlink'
-import Button from '@/components/atoms/button'
-
-
-
+import Head from "next/head";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { supabase } from "@/utils/supabaseClient";
+import { LinkDef } from "@/types";
+import Card from "@/components/cardlink";
+import Button from "@/components/atoms/button";
 
 export default function Dashboard() {
-  const [isAuth, setIsAuth] = useState<boolean>(false)
-  const [userId, setUserId] = useState<string | undefined>()
-  const [title, setTitle] = useState<string | undefined>()
-  const [desc, setDesc] = useState<string | undefined>()
-  const [url, setUrl] = useState<string | undefined>()
-  const [links, setLinks] = useState<LinkDef[]>()
+  const [isAuth, setIsAuth] = useState<boolean>(false);
+  const [userId, setUserId] = useState<string | undefined>();
+  const [title, setTitle] = useState<string | undefined>();
+  const [desc, setDesc] = useState<string | undefined>();
+  const [url, setUrl] = useState<string | undefined>();
+  const [links, setLinks] = useState<LinkDef[]>();
 
-  console.log(isAuth)
+  console.log(isAuth);
 
   useEffect(() => {
     const getUser = async () => {
-      const user = await supabase.auth.getUser()
+      const user = await supabase.auth.getUser();
       try {
         if (user) {
-          const userLoginId = user.data.user?.id
-          setIsAuth(true)
-          setUserId(userLoginId)
+          const userLoginId = user.data.user?.id;
+          setIsAuth(true);
+          setUserId(userLoginId);
         }
       } catch (error) {
-        console.log("error on load user", error)
+        console.log("error on load user", error);
       }
-
-    }
-    getUser()
-
-  }, [])
+    };
+    getUser();
+  }, []);
 
   useEffect(() => {
     const getLinks = async () => {
       try {
-        const { data, error } = await supabase.from("links").select("id, title, description, url").eq("user_id", userId);
-        if (error) throw error
-        setLinks(data)
-        console.log("data from db: ", data)
+        const { data, error } = await supabase
+          .from("links")
+          .select("id, title, description, url")
+          .eq("user_id", userId);
+        if (error) throw error;
+        setLinks(data);
+        console.log("data from db: ", data);
       } catch (error) {
-        console.log("error", error)
+        console.log("error", error);
       }
-    }
+    };
 
     if (userId) {
-      getLinks()
+      getLinks();
     }
-  }, [userId])
-
+  }, [userId]);
 
   const addNewLink = async () => {
     try {
       if (title && desc && url) {
-        const { data, error } = await supabase.from("links").insert({
-          title: title,
-          description: desc,
-          url: url,
-          user_id: userId
-        }).select()
+        const { data, error } = await supabase
+          .from("links")
+          .insert({
+            title: title,
+            description: desc,
+            url: url,
+            user_id: userId,
+          })
+          .select();
         if (error) throw error;
-        console.log('data: ', data)
+        console.log("data: ", data);
       }
     } catch (error) {
-      console.log("error: ", error)
+      console.log("error: ", error);
     }
-
-  }
-
+  };
 
   return (
     <>
@@ -84,12 +81,8 @@ export default function Dashboard() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="">
-
         <div className="">
-          <h1 className='text-white text-2xl font-bold'>
-
-            Welcome to Monolink
-          </h1>
+          <h1 className="text-white text-2xl font-bold">Welcome to Monolink</h1>
           <div className="">
             <Image
               src="/monolink.svg"
@@ -101,35 +94,56 @@ export default function Dashboard() {
           </div>
         </div>
 
-
-        {
-          isAuth && (
-            <div className='flex flex-col'>
-              <div className="mb-4 text-lg">
-                <input className="rounded-2xl bg-black bg-opacity-50 border-slate-500 px-6 py-3 text-inherit placeholder-gray-500 shadow-lg outline-none backdrop-blur-md" type="text" name="title" id='title' placeholder="Title" onChange={(event) => setTitle(event.target.value)} />
-              </div>
-
-              <div className="mb-4 text-lg">
-                <input className="rounded-2xl bg-black bg-opacity-50 border-slate-500 px-6 py-3  text-inherit placeholder-gray-500 shadow-lg outline-none backdrop-blur-md" type="text" name="description" id='desc' placeholder="Description" onChange={(event) => setDesc(event.target.value)} />
-              </div>
-              <div className="mb-4 text-lg">
-                <input className="rounded-2xl border-slate-500 bg-black bg-opacity-50 px-6 py-3  text-inherit placeholder-gray-500 shadow-lg outline-none backdrop-blur-md" type="text" name="url" id='url' placeholder="https://..." onChange={(event) => setUrl(event.target.value)} />
-              </div>
-              <div className='self-center flex flex-col gap-4'>
-                <Button label="Add link" onClick={addNewLink} />
-                <button onClick={() => supabase.auth.signOut()} className='btn border border-slate-400 rounded-xl py-2 px-4 backdrop-blur-lg filter bg-transparent hover:border-zinc-600 hover:text-gray-800 transition-all duration-150 text-sm'>Add Link</button>
-              </div>
+        {isAuth && (
+          <div className="flex flex-col">
+            <div className="mb-4 text-lg">
+              <input
+                className="rounded-2xl bg-black bg-opacity-50 border-slate-500 px-6 py-3 text-inherit placeholder-gray-500 shadow-lg outline-none backdrop-blur-md"
+                type="text"
+                name="title"
+                id="title"
+                placeholder="Title"
+                onChange={(event) => setTitle(event.target.value)}
+              />
             </div>
-          )}
-        <div className='flex flex-row mt-4 p-4 gap-4 flex-wrap max-w-3xl'>
-          {
-            links?.map((link: LinkDef) => (
-              <Card key={link.id} id={link.id} title={link.title} description={link.description} url={link.url} />
-            ))
-          }
 
+            <div className="mb-4 text-lg">
+              <input
+                className="rounded-2xl bg-black bg-opacity-50 border-slate-500 px-6 py-3  text-inherit placeholder-gray-500 shadow-lg outline-none backdrop-blur-md"
+                type="text"
+                name="description"
+                id="desc"
+                placeholder="Description"
+                onChange={(event) => setDesc(event.target.value)}
+              />
+            </div>
+            <div className="mb-4 text-lg">
+              <input
+                className="rounded-2xl border-slate-500 bg-black bg-opacity-50 px-6 py-3  text-inherit placeholder-gray-500 shadow-lg outline-none backdrop-blur-md"
+                type="text"
+                name="url"
+                id="url"
+                placeholder="https://..."
+                onChange={(event) => setUrl(event.target.value)}
+              />
+            </div>
+            <div className="self-center flex flex-col gap-4">
+              <Button label="Add link" onClick={addNewLink} />
+            </div>
+          </div>
+        )}
+        <div className="flex flex-row mt-4 p-4 gap-4 flex-wrap max-w-3xl">
+          {links?.map((link: LinkDef) => (
+            <Card
+              key={link.id}
+              id={link.id}
+              title={link.title}
+              description={link.description}
+              url={link.url}
+            />
+          ))}
         </div>
-      </main >
+      </main>
     </>
-  )
+  );
 }

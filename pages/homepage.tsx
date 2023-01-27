@@ -22,6 +22,9 @@ import { LinkDef } from "@/types";
 import Card from "@/components/cardlink";
 import Modal from "@/components/modal";
 import { useModalStore } from "@/store/store";
+import SignOut from "@/components/signOut";
+import LoginButton from "@/components/LoginButton";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 const data = [
   {
@@ -99,12 +102,11 @@ export default function Home() {
   const [desc, setDesc] = useState<string | undefined>();
   const [url, setUrl] = useState<string | undefined>();
   const [links, setLinks] = useState<LinkDef[]>();
+  const [isAuth, setIsAuth] = useState<boolean>(false);
 
   const { setOpen } = useModalStore((state) => ({
     setOpen: state.setOpen,
   }));
-
-  const [isAuth, setIsAuth] = useState<boolean>(false);
 
   const controls = useAnimation();
   const controlText = useAnimation();
@@ -132,8 +134,8 @@ export default function Home() {
 
   useEffect(() => {
     const getUser = async () => {
-      const user = await supabase.auth.getUser();
       try {
+        const user = await supabase.auth.getUser();
         if (user) {
           const userLoginId = user.data.user?.id;
           setIsAuth(true);
@@ -302,16 +304,8 @@ export default function Home() {
 
       <motion.div className="animate duration-300 flex-1 flex-col bg-zinc-900  min-h-screen ">
         <motion.div className="animate duration-300 flex-1 border-b-2 border-zinc-900 bg-black flex flex-col h-24">
+          {!isAuth ? <LoginButton /> : <SignOut />}
           <Modal />
-          {isAuth && (
-            <button
-              title="Add link"
-              onClick={setOpen}
-              className="flex items-center justify-center self-end my-auto w-auto px-3 py-2 mr-6 font-bold text-black bg-green-400 rounded-lg"
-            >
-              <BsPlus className="text-2xl" />
-            </button>
-          )}
         </motion.div>
 
         <motion.div className="animate duration-300 flex-1  bg-zinc-900 ">
