@@ -10,10 +10,11 @@ import { supabase } from "@/utils/supabaseClient";
 import { LinkDef } from "@/types";
 import Card from "@/components/cardlink";
 import Modal from "@/components/modal";
-import { useAuthStore, useModalStore } from "@/store/store";
+import { useAuthStore } from "@/store/store";
 import SignOut from "@/components/SignOutButton";
 import { NextPage } from "next";
 import { data, datafooter } from "../utils/data";
+import { useRouter } from "next/router";
 
 const Dashboard: NextPage = () => {
   const [active, setActive] = useState(false);
@@ -22,8 +23,11 @@ const Dashboard: NextPage = () => {
   const [url, setUrl] = useState<string | undefined>();
   const [links, setLinks] = useState<LinkDef[]>();
 
-  const { user } = useAuthStore((state) => ({
+  const router = useRouter();
+
+  const { user, isAuth } = useAuthStore((state) => ({
     user: state.user,
+    isAuth: state.isAuth,
   }));
 
   const controls = useAnimation();
@@ -58,15 +62,19 @@ const Dashboard: NextPage = () => {
           .select("id, title, description, url")
           .eq("user_id", user.data?.user.id);
         if (error) throw error;
+        console.log(user.data?.user.id);
+        console.log(user);
         setLinks(data);
-        console.log("data from db: ", data);
       } catch (error) {
         console.log("error", error);
       }
     };
 
+    if (!isAuth) {
+      router.push("/login");
+    }
     getLinks();
-  }, [user]);
+  }, [isAuth]);
 
   const showMore = () => {
     controls.start({
@@ -204,7 +212,7 @@ const Dashboard: NextPage = () => {
 
       <motion.div className="animate duration-300 flex-1 flex-col bg-zinc-900  min-h-screen ">
         <motion.div className="animate duration-300 flex-1 border-b-2 border-zinc-900 bg-black flex flex-col h-24">
-          {!user ? <div>OK</div> : <SignOut />}
+          {!isAuth ? <div>OK</div> : <SignOut />}
           <Modal />
         </motion.div>
 

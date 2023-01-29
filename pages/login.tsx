@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { supabase } from "@/utils/supabaseClient";
 import { useAuthStore } from "@/store/store";
+import { useRouter } from "next/router";
 
 const Login = () => {
   const [email, setEmail] = useState<string | undefined>();
   const [password, setPassword] = useState<string | undefined>();
+  const router = useRouter();
 
-  const { setUser } = useAuthStore((state) => ({
+  const { user, setUser, setIsAuth } = useAuthStore((state) => ({
+    user: state.user,
     setUser: state.setUser,
+    setIsAuth: state.setIsAuth,
   }));
 
   async function signInWithEmail() {
@@ -18,6 +22,7 @@ const Login = () => {
           email: email,
           password: password,
         });
+        setIsAuth(true);
         setUser(response);
         console.log("user has been write", response);
 

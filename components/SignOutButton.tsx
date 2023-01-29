@@ -5,12 +5,14 @@ import { useAuthStore } from "@/store/store";
 const SignOut = () => {
   const { push } = useRouter();
 
-  const { setUser } = useAuthStore((state) => ({
+  const { setUser, setIsAuth } = useAuthStore((state) => ({
     setUser: state.setUser,
+    setIsAuth: state.setIsAuth,
   }));
 
   const handleSubmit = () => {
-    setUser({});
+    setUser(null);
+    setIsAuth(false);
     authApi.signOut();
     push("/");
   };

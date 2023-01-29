@@ -9,6 +9,7 @@ interface ModalState {
 interface AuthState {
   user: null;
   isAuth: boolean;
+  setIsAuth: (isAuth: boolean) => void;
   setUser: (user: any) => void;
 }
 
@@ -31,6 +32,7 @@ export const useAuthStore = create(
       user: null,
       isAuth: false,
       setUser: (user) => set({ user }),
+      setIsAuth: (isAuth: boolean) => set((state) => ({ isAuth })),
     }),
     {
       name: "auth-key", // unique name for this store
