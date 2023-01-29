@@ -1,13 +1,15 @@
-import { useRouter } from "next/router";
 import React, { useState } from "react";
 import Image from "next/image";
 import { supabase } from "@/utils/supabaseClient";
-import { useUser } from "@supabase/auth-helpers-react";
+import { useAuthStore } from "@/store/store";
 
 const Login = () => {
   const [email, setEmail] = useState<string | undefined>();
   const [password, setPassword] = useState<string | undefined>();
-  const router = useRouter();
+
+  const { setUser } = useAuthStore((state) => ({
+    setUser: state.setUser,
+  }));
 
   async function signInWithEmail() {
     try {
@@ -16,13 +18,18 @@ const Login = () => {
           email: email,
           password: password,
         });
+        setUser(response);
+        console.log("user has been write", response);
+
         if (response.error) throw response.error;
-        router.push("/");
       }
     } catch (error) {
       console.log(error);
     }
   }
+  const handleSubmit = () => {
+    signInWithEmail();
+  };
 
   return (
     <div className="flex h-screen w-full items-center justify-center bg-zinc-800">
@@ -65,7 +72,7 @@ const Login = () => {
             <button
               type="button"
               className="mt-4 self-center border border-gray-400 rounded-3xl bg-black bg-opacity-50 px-10 py-2 text-white backdrop-blur-md transition-colors duration-300 hover:bg-zinc-800"
-              onClick={signInWithEmail}
+              onClick={handleSubmit}
             >
               Login
             </button>
