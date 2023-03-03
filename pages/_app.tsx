@@ -1,33 +1,15 @@
-import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { SessionContextProvider } from "@supabase/auth-helpers-react";
-import "@/styles/globals.css";
-import { useEffect, useState } from "react";
-import type { AppProps } from "next/app";
-import { supabase } from "@/utils/supabaseClient";
-import { useRouter } from "next/router";
-import { useAuthStore } from "@/store/store";
+import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
+import { SessionContextProvider } from '@supabase/auth-helpers-react'
+import '@/styles/globals.css'
+import { useState } from 'react'
+import type { AppProps } from 'next/app'
 
 export default function App({ Component, pageProps }: AppProps) {
-  const router = useRouter();
-
-  const { user } = useAuthStore((state) => ({
-    user: state.user,
-  }));
-  const [supabaseClient] = useState(() => createBrowserSupabaseClient());
-
-  useEffect(() => {
-    const checkSession = async () => {
-      const { data } = await supabase.auth.getSession();
-      if (data.session) {
-        router.push("/dashboard");
-      }
-    };
-    checkSession();
-  }, [user]);
+  const [supabaseClient] = useState(() => createBrowserSupabaseClient())
 
   return (
     <SessionContextProvider supabaseClient={supabaseClient}>
       <Component {...pageProps} />
     </SessionContextProvider>
-  );
+  )
 }

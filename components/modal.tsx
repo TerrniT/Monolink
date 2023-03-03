@@ -1,22 +1,22 @@
-import { useModalStore } from "@/store/store";
-import { Dialog, Transition } from "@headlessui/react";
-import { NextComponentType } from "next";
-import { Fragment, useState } from "react";
+import { useModalStore } from '@/store/store'
+import { Dialog, Transition } from '@headlessui/react'
+import { NextComponentType } from 'next'
+import { Fragment, useState } from 'react'
 
-import { BsPlus } from "react-icons/bs";
+import { BsPlus } from 'react-icons/bs'
 
 const Modal: NextComponentType = () => {
   const { open, setOpen } = useModalStore((state) => ({
     open: state.open,
     setOpen: state.setOpen,
-  }));
+  }))
 
   return (
     <>
       <button
         title="Add link"
         onClick={setOpen}
-        className="flex items-center justify-center self-end my-auto w-auto px-3 py-2 mr-6 font-bold text-black bg-green-400 rounded-lg"
+        className="my-auto mr-6 flex w-auto items-center justify-center self-end rounded-lg bg-green-400 px-3 py-2 font-bold text-black"
       >
         <BsPlus className="text-2xl" />
       </button>
@@ -55,7 +55,7 @@ const Modal: NextComponentType = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="my-8 inline-block w-full max-w-md transform overflow-hidden rounded-2xl bg-zinc-900 border border-gray-600 p-6 text-left align-middle shadow-xl transition-all">
+              <div className="my-8 inline-block w-full max-w-md transform overflow-hidden rounded-2xl border border-gray-600 bg-zinc-900 p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium leading-6 text-white"
@@ -85,7 +85,7 @@ const Modal: NextComponentType = () => {
         </Dialog>
       </Transition>
     </>
-  );
-};
+  )
+}
 
-export default Modal;
+export default Modal

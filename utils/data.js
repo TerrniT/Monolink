@@ -6,78 +6,78 @@ import {
   BsPeopleFill,
   BsTerminalFill,
   BsFillArrowRightSquareFill,
-} from "react-icons/bs";
+} from 'react-icons/bs'
 
-import { AiFillFire, AiFillMessage } from "react-icons/ai";
-import { IoMdArrowRoundUp } from "react-icons/io";
-import { MdNightlightRound, MdFeedback } from "react-icons/md";
-import { FaCog } from "react-icons/fa";
+import { AiFillFire, AiFillMessage } from 'react-icons/ai'
+import { IoMdArrowRoundUp } from 'react-icons/io'
+import { MdNightlightRound, MdFeedback } from 'react-icons/md'
+import { FaCog } from 'react-icons/fa'
 
 export const data = [
   {
-    name: "Discover",
+    name: 'Discover',
     items: [
       {
-        title: "Popular",
+        title: 'Popular',
         icon: AiFillFire,
       },
       {
-        title: "Most Upvoted",
+        title: 'Most Upvoted',
         icon: IoMdArrowRoundUp,
       },
       {
-        title: "Best Discussions",
+        title: 'Best Discussions',
         icon: AiFillMessage,
       },
       {
-        title: "Search",
+        title: 'Search',
         icon: BsSearch,
       },
     ],
   },
   {
-    name: "Manage",
+    name: 'Manage',
     items: [
       {
-        title: "Bookmarks",
+        title: 'Bookmarks',
         icon: BsBookmarkFill,
       },
       {
-        title: "Reading history",
+        title: 'Reading history',
         icon: BsEyeFill,
       },
       {
-        title: "Focus Mode",
+        title: 'Focus Mode',
         icon: MdNightlightRound,
       },
       {
-        title: "Customize",
+        title: 'Customize',
         icon: FaCog,
       },
     ],
   },
-];
+]
 
 export const datafooter = [
   {
-    name: "",
+    name: '',
     items: [
       {
-        title: "Docs",
+        title: 'Docs',
         icon: BsBookmarkFill,
       },
       {
-        title: "Changelog",
+        title: 'Changelog',
         icon: BsTerminalFill,
       },
       {
-        title: "Feedback",
+        title: 'Feedback',
         icon: MdFeedback,
       },
       {
-        title: "Invite people",
+        title: 'Invite people',
         icon: BsPeopleFill,
       },
     ],
   },
-];
+]

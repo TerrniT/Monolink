@@ -1,4 +1,4 @@
-### Monolink - tools to organize your web experience 
+### Monolink - tools to organize your web experience
 
 ## Getting Started
 
@@ -11,4 +11,3 @@ yarn dev
 # or
 pnpm dev
 ```
-

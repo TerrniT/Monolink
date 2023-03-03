@@ -1,17 +1,17 @@
-import { supabase } from "@/utils/supabaseClient";
-import { NextApiRequest, NextApiResponse } from "next";
+import { supabase } from '@/utils/supabaseClient'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 async function getUser() {
-  const user = await supabase.auth.getUser();
+  const user = await supabase.auth.getUser()
   if (user) {
     try {
-      return user;
+      return user
     } catch (error) {
-      console.log("error on load user", error);
+      console.log('error on load user', error)
     }
   }
 }
 
-const userApi = { getUser };
+const userApi = { getUser }
 
-export default userApi;
+export default userApi
