@@ -1,84 +1,29 @@
-import LoginButton from '@/components/LoginButton'
-import { NextPage } from 'next'
-import { useEffect, useState } from 'react'
-import { supabase } from '@/utils/supabaseClient'
-import { useAuthStore } from '@/store/store'
-import Dashboard from './dashboard'
-import Login from './login'
-import { useRouter } from 'next/router'
-import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs'
+import Navbar from '@/components/navbar'
+import Link from 'next/link'
+import React from 'react'
 
-interface ServerProps {
-  initialSession: any
-}
+type Props = {}
 
-const Home = ({ initialSession }: ServerProps) => {
-  const [isLoading, setIsLoading] = useState(true)
-  const router = useRouter()
-
-  const userZ = useAuthStore((state) => {
-    user: state.user
-  })
-  console.log('@')
-
-  // useEffect(() => {
-  //   let mounted = true
-
-  //   async function getInitialSession() {
-  //     const {
-  //       data: { session },
-  //     } = await supabase.auth.getSession()
-
-  //     if (mounted) {
-  //       if (session) {
-  //         setSession(session)
-  //       }
-  //       setIsLoading(false)
-  //     }
-  //   }
-  //   //@ts-ignore
-  //   const { subscription } = supabase.auth.onAuthStateChange(
-  //     (_event, session) => {
-  //       setSession(session)
-  //     }
-  //   )
-
-  //   getInitialSession()
-
-  //   return () => {
-  //     mounted = false
-  //     subscription?.unsubscrbie()
-  //   }
-  // }, [])
-
+const index = (props: Props) => {
   return (
-    <div>
-      {!initialSession ? <Login /> : <Dashboard session={initialSession} />}
+    <div className="mx-auto flex h-screen w-full flex-shrink ">
+      <div className="mx-auto flex items-center justify-center gap-6">
+        <Link
+          className="rounded-md border border-zinc-600 px-6 py-3"
+          href="/login"
+        >
+          Log In
+        </Link>
+
+        <Link
+          className="rounded-md border border-zinc-600 px-6 py-3"
+          href="/signup"
+        >
+          Sign Up
+        </Link>
+      </div>
     </div>
   )
 }
 
-export default Home
-
-export const getServerSideProps = async (ctx: any) => {
-  const supabase = createServerSupabaseClient(ctx)
-
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
-
-  if (session) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    }
-  }
-
-  return {
-    props: {
-      initialSession: session,
-    },
-  }
-}
+export default index

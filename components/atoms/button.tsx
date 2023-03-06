@@ -1,16 +1,42 @@
-import React from 'react'
+import React from "react"
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+import { IconType } from "react-icons/lib"
+import { ReactSVG } from "react-svg"
 
-interface ButtonProps extends React.ComponentProps<'button'> {
-  label: string
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
 }
 
-const Button: React.FC<ButtonProps> = ({ label, onClick }) => {
+export interface ButtonProps
+  extends React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
+  title: string
+  className?: string
+  icon?: string
+}
+
+interface IconProps {
+  iconName: string
+}
+
+const Icon = ({ iconName }: IconProps) => {
+  return <ReactSVG src={`${iconName}.svg`} className="w-6 h-6 object-contain" />
+}
+
+const Button: React.FC<ButtonProps> = ({ className, icon, title, ...props }) => {
   return (
     <button
-      className="rounded-xl border border-slate-400 bg-transparent py-2 px-4 text-sm filter backdrop-blur-lg transition-all duration-150 hover:border-zinc-600 hover:text-gray-800"
-      onClick={onClick}
+      className={cn(
+        `bg-green-400 text-md md:whitespace-nowrap text-white text-center py-2 px-4 flex items-center ${icon ? "justify-between" : "justify-center"} rounded-lg`,
+        className,
+      )}
+      {...props}
     >
-      {label}
+      {icon && <Icon iconName={icon} />}
+      <p className='pl-2 mx-auto'>{title}</p>
     </button>
   )
 }
