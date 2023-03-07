@@ -30,7 +30,7 @@ const Button: React.FC<ButtonProps> = ({ className, icon, title, ...props }) => 
   return (
     <button
       className={cn(
-        `bg-green-400 text-md md:whitespace-nowrap text-white text-center py-2 px-4 flex items-center ${icon ? "justify-between" : "justify-center"} rounded-lg`,
+        `bg-green-400 w-full text-md md:whitespace-nowrap text-white text-center py-2 px-4 flex items-center ${icon ? "justify-between" : "justify-center"} rounded-lg`,
         className,
       )}
       {...props}
