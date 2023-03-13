@@ -1,22 +1,19 @@
-import authApi from '@/pages/api/auth'
-import { useAuthStore } from '@/store/store'
+import { supabase } from '@/utils/supabaseClient'
+import { useRouter } from 'next/router'
 
 const SignOut = () => {
-  const { setUser, isAuth, setIsAuth } = useAuthStore((state) => ({
-    setUser: state.setUser,
-    isAuth: state.isAuth,
-    setIsAuth: state.setIsAuth,
-  }))
+  const router = useRouter()
 
-  const handleSubmit = () => {
-    setUser(null)
-    setIsAuth(false)
-    authApi.signOut()
+  const handleSubmit = async () => {
+
+    const { error } = await supabase.auth.signOut()
+    router.push("/login")
+
   }
 
   return (
     <button
-      onClick={handleSubmit}
+      onClick={() => handleSubmit()}
       className="btn rounded-xl border border-slate-400 bg-transparent py-2 px-4 text-sm filter backdrop-blur-lg transition-all duration-150 hover:border-zinc-600 hover:text-gray-800"
     >
       Sign Out

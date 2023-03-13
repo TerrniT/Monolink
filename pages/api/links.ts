@@ -6,9 +6,9 @@ const getLinks = async (userId: any) => {
       .from('links')
       .select('id, title, description, url')
       .eq('user_id', userId)
+    console.log('data from db: ', data)
     if (error) throw error
     return { data, error }
-    console.log('data from db: ', data)
   } catch (error) {
     console.log('error', error)
   }

@@ -1,29 +1,35 @@
-import Navbar from '@/components/navbar'
-import Link from 'next/link'
-import React from 'react'
+import { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import React, { useEffect } from 'react'
+import useUser from "../hooks/useUser"
+import Dashboard from './dashboard'
+import 'react-toastify/dist/ReactToastify.css';
+import { AddLink } from '@/components'
 
-type Props = {}
 
-const index = (props: Props) => {
+const Home: NextPage = () => {
+  const router = useRouter()
+  const { user, isLoading } = useUser()
+
+  useEffect(() => {
+    if (!user && !isLoading) {
+      router.push("/")
+    }
+
+    console.log("user logged", user)
+  }, [user, isLoading, router])
+
+  if (isLoading) {
+    return <div>IsLoading</div>
+  }
+
+
   return (
-    <div className="mx-auto flex h-screen w-full flex-shrink ">
-      <div className="mx-auto flex items-center justify-center gap-6">
-        <Link
-          className="rounded-md border border-zinc-600 px-6 py-3"
-          href="/login"
-        >
-          Log In
-        </Link>
-
-        <Link
-          className="rounded-md border border-zinc-600 px-6 py-3"
-          href="/signup"
-        >
-          Sign Up
-        </Link>
-      </div>
+    <div className="mx-auto flex h-screen w-full ">
+      <Dashboard user={user} />
+      <AddLink />
     </div>
   )
 }
 
-export default index
+export default Home 
