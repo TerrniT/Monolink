@@ -1,7 +1,12 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { persist, devtools } from "zustand/middleware";
 
 interface ModalState {
+  open: boolean
+  setOpen: () => void
+}
+
+interface CmdState {
   open: boolean
   setOpen: () => void
 }
@@ -12,6 +17,21 @@ interface AuthState {
   setIsAuth: (isAuth: boolean) => void
   setUser: (user: any) => void
 }
+
+
+export const useCmdStore = create<CmdState>()(
+  devtools(
+    persist<CmdState>((set) => ({
+      open: false,
+      setOpen: () => set((state) => ({ open: !state.open })),
+    }),
+      {
+        name: 'cmd-key',
+        getStorage: () => localStorage
+      })
+  )
+);
+
 
 export const useModalStore = create(
   persist<ModalState>(

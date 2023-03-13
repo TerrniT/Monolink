@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query'
 import SkeletonCardList from './ui/skeleton/SkeletonCardList'
 import CardList from './CardList'
 import HelpPopover from './HelpPopover'
+import CommandPallete from './CommandPallete'
 
 type Props = {
   user: User | undefined
@@ -23,6 +24,7 @@ const CardContainer = ({ user }: Props) => {
           {isLoading ? (<SkeletonCardList />) : (<CardList data={data} />)}
         </div>
       </motion.div>
+      <CommandPallete data={data} />
       <HelpPopover />
     </motion.div>
   )

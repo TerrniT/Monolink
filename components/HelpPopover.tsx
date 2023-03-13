@@ -6,13 +6,13 @@ import { FaUserPlus } from 'react-icons/fa'
 
 const HelpPopover = () => {
   return (
-    <Popover className="z-50 hidden lg:block md:block shadow-md">
-      <Popover.Button className='flex text-sm duration-150 transition-all absolute bottom-7 right-7 px-4 py-2 bg-zinc-800/20 ring-1 ring-zinc-800 hover:ring-zinc-600 hover:text-gray-400 items-center justify-start gap-1 text-zinc-500 rounded-lg' ><MdHelpOutline />
+    <Popover className="z-50 hidden lg:block md:block shadow-md ">
+      <Popover.Button className='flex text-sm duration-150 transition-all fixed bottom-8 right-8 px-4 py-2 bg-zinc-800/20 ring-1 ring-zinc-800 hover:ring-zinc-600 hover:text-gray-400 items-center justify-start gap-1 text-zinc-500 rounded-lg' ><MdHelpOutline />
         Help
       </Popover.Button>
       <Popover.Overlay className="fixed inset-0 bg-black opacity-30" />
       <Transition
-        className="absolute right-6 bottom-20"
+        className="fixed right-8 bottom-20"
         enter="transition duration-100 ease-out"
         enterFrom="transform scale-95 opacity-0"
         enterTo="transform scale-100 opacity-100"
@@ -20,7 +20,7 @@ const HelpPopover = () => {
         leaveFrom="transform scale-100 opacity-100"
         leaveTo="transform scale-95 opacity-0"
       >
-        <Popover.Panel className="z-50 bg-zinc-800/90 backdrop-blur-md  rounded-md w-[16rem] text-sm ring-1 ring-zinc-700/60">
+        <Popover.Panel className="z-50 bg-zinc-800/90 backdrop-blur-md rounded-md w-[16rem] text-sm ring-1 ring-zinc-700/60">
           <div className='px-3 py-2 '>
             <div className='flex items-center justify-between'><h2 className='font-medium'>Help</h2><Popover.Button className='rounded-full bg-zinc-600 p-1'><MdClose /></Popover.Button></div>
             <div className='flex items-center justify-between my-3'><h2 className='font-medium'>Popular topics</h2><Link href="/blog" className='text-cyan-600'>Show all</Link></div>
