@@ -12,7 +12,7 @@ const Cardlink = (props: LinkDef) => {
       key={props.id}
       className="shadow-1xl relative min-h-[10rem] rounded-2xl bg-black/30 ring-1 ring-white/10 "
     >
-      <div className="relative z-10 flex h-full flex-col justify-between  ">
+      <div className="relative  flex h-full flex-col justify-between  ">
         <div className="flex items-center  justify-between px-6 py-4 relative ">
           <div className="w-full flex justify-between ">
             <div className="flex items-center w-full ">
