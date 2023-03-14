@@ -5,6 +5,7 @@ import { supabase } from '@/utils/supabaseClient'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import { Provider } from "@supabase/supabase-js"
+import { AuthService } from '@/service/auth.service'
 
 const Login = () => {
   const [email, setEmail] = useState<string>("")
@@ -16,11 +17,7 @@ const Login = () => {
   const handleLogin = async (email: string, password: string) => {
     try {
       setLoading(true)
-      const { error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password,
-      },)
-
+      const error = AuthService.signInPassword(email, password)
       if (error) {
         throw error
       } else {
@@ -51,10 +48,8 @@ const Login = () => {
   //   console.log(password)
   // }
 
-  const signInWithOAuth = async (provider: Provider) => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: provider,
-    })
+  const handleClick = (provider: Provider) => {
+    AuthService.signInWithOAuth(provider)
   }
 
   return (
@@ -93,8 +88,8 @@ const Login = () => {
               <div className='h-[1px] w-full bg-gray-stroke'></div>
             </div>
             <Button title="Sign in with Metamask" icon="metamask" className='bg-transparent border-[1px] border-gray-stroke text-xs text-white font-normal p-2 mb-3 ' />
-            <Button title="Sign in with Github" icon="github" className='bg-transparent border-[1px] border-gray-stroke text-xs text-white font-normal p-2 mb-3' onClick={() => signInWithOAuth("github")} />
-            <Button title="Sign in with Google" icon="google" className='bg-transparent border-[1px] border-gray-stroke text-xs text-white font-normal p-2 mb-3' onClick={() => signInWithOAuth("google")} />
+            <Button title="Sign in with Github" icon="github" className='bg-transparent border-[1px] border-gray-stroke text-xs text-white font-normal p-2 mb-3' onClick={() => handleClick("github")} />
+            <Button title="Sign in with Google" icon="google" className='bg-transparent border-[1px] border-gray-stroke text-xs text-white font-normal p-2 mb-3' onClick={() => handleClick("google")} />
             <Link href="/signup" className='hover:text-accent-green-second text-accent-green text-xs self-center transition-all duration-200'>
               New to Monolink? Sign Up
             </Link>

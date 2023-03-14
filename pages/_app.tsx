@@ -1,14 +1,16 @@
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
 import '@/styles/globals.css'
+import "../styles/globals.css"
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react'
 import type { AppProps } from 'next/app'
 import { ToastContainer } from 'react-toastify';
 import { Session } from 'inspector';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { FC } from 'react'
 
-export default function App({ Component, pageProps }: AppProps) {
+const App: FC<AppProps> = ({ Component, pageProps }) => {
   const [supabaseClient] = useState(() => createBrowserSupabaseClient())
 
   const [session, setSession] = useState<Session | null>(null);
@@ -37,3 +39,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </QueryClientProvider>
   )
 }
+
+export default App

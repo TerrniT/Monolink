@@ -1,13 +1,13 @@
 import { useState, useEffect, Fragment } from "react";
 import { Dialog, Combobox, Transition } from "@headlessui/react";
-import { BsSearch } from "react-icons/bs";
 import { useCmdStore } from "../store/store"
 import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { LinkDef } from "@/types";
+import { FiSearch } from "react-icons/fi"
 
 interface Props {
-  data: LinkDef[]
+  data?: LinkDef[]
 }
 
 export default function CommandPallete({ data }: Props) {
@@ -49,7 +49,7 @@ export default function CommandPallete({ data }: Props) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-black/10 dark:bg-dark-bg dark:bg-opacity-10 bg-opacity-10 backdrop-blur backdrop-filter" />
+            <Dialog.Overlay className="fixed inset-0 bg-black/10  bg-opacity-20 backdrop-blur backdrop-filter" />
           </Transition.Child>
 
           <Transition.Child
@@ -66,23 +66,23 @@ export default function CommandPallete({ data }: Props) {
               onChange={(lib: any) => {
                 window.open(lib.url, "_blank");
               }}
-              className="scrollbar-w-1 scrollbar-thumb-gray-400 scrollbar-track-gray-200 relative bg-light-transparent/40 dark:bg-dark-transparent/60 max-w-xl mx-auto rounded-2xl shadow-2xl ring-1 ring-white/10  divide-y divide-gray-800 overflow-hidden"
+              className=" relative bg-black  max-w-xl mx-auto rounded-2xl shadow-2xl ring-1 ring-white/10 divide-y divide-gray-800 overflow-hidden"
             >
-              <div className="flex items-center justify-center px-3">
-                <BsSearch />
+              <div className="flex items-center justify-center px-4">
+                <FiSearch className="text-zinc-400 text-lg" />
                 <Combobox.Input
                   value={query}
                   onChange={(event) =>
                     setQuery(event?.target.value.toLowerCase())
                   }
-                  className="overflow-hidden w-full bg-transparent border-none  focus:outline-none focus:ring-0 text-sm placeholder-black/60 dark:placeholder-white/60 p-3 h-12 focus:border-transparent"
-                  placeholder="Search docs..."
+                  className="overflow-hidden w-full bg-transparent border-none focus:outline-none focus:ring-0 text-sm placeholder-black/60  p-3 h-12 focus:border-transparent"
+                  placeholder="Search or type a command..."
                 />
 
               </div>
               {/* TODO: Rewrite filter-function (name -> title by type Library) */}
               {data && data.length > 0 ? (
-                <Combobox.Options className="py-4 text-sm max-h-96 overflow-y-auto ">
+                <Combobox.Options className=" scrollbar scrollbar-thumb-zinc-700  py-4 text-sm max-h-96 overflow-y-auto ">
                   {data.map((data) => (
                     <Combobox.Option
                       className="px-2 my-2"
@@ -93,7 +93,7 @@ export default function CommandPallete({ data }: Props) {
                         <div
                           className={`px-4 py-2 ${!active
                             ? "bg-black/10 "
-                            : "bg-white dark:bg-dark-transparent/80  "
+                            : "bg-white/20 dark:bg-dark-transparent/80  "
                             } rounded-xl`}
                         >
                           <span

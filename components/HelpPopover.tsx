@@ -22,9 +22,13 @@ const HelpPopover = () => {
       >
         <Popover.Panel className="z-50 bg-zinc-800/90 backdrop-blur-md rounded-md w-[16rem] text-sm ring-1 ring-zinc-700/60">
           <div className='px-3 py-2 '>
-            <div className='flex items-center justify-between'><h2 className='font-medium'>Help</h2><Popover.Button className='rounded-full bg-zinc-600 p-1'><MdClose /></Popover.Button></div>
+            <div className='flex items-center justify-between'>
+              <h2 className='font-medium'>Help</h2>
+              <Popover.Button className='rounded-full bg-zinc-600 p-1'>
+                <MdClose />
+              </Popover.Button>
+            </div>
             <div className='flex items-center justify-between my-3'><h2 className='font-medium'>Popular topics</h2><Link href="/blog" className='text-cyan-600'>Show all</Link></div>
-
             <div className='flex flex-col gap-2 '>
               <div className='bg-zinc-700/60 ring-1 ring-zinc-700 w-full flex items-center rounded-md px-2 py-2'>
                 <div className='w-36 h-14 object-cover mr-2'>
