@@ -1,13 +1,17 @@
 
 import { supabase } from "@/utils/supabaseClient"
 import { Provider } from "@supabase/supabase-js"
+import { Router } from "next/router"
 
 
 export const AuthService = {
+
+
   async signInWithOAuth(provider: Provider) {
-    const { data, error } = await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: provider,
     })
+    return { error }
   },
   async signInPassword(email: string, password: string) {
     const { error } = await supabase.auth.signInWithPassword({
@@ -16,10 +20,21 @@ export const AuthService = {
     },)
     return { error }
   },
+  async signUpWithMagicLink(email: string) {
+    const { error } = await supabase.auth.signInWithOtp({
+      email: email,
+      options: {
+        emailRedirectTo: 'http:localhost:3000/dashboard',
+      },
+    },)
+    return { error }
+  },
 
   async signOut() {
     await supabase.auth.signOut()
+  },
+  async getSession() {
+    const { data: { session }, error } = await supabase.auth.getSession()
+    return { session, error }
   }
-
-
 }

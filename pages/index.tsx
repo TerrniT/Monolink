@@ -9,15 +9,14 @@ import { AddLink } from '@/components'
 
 const Home: NextPage = () => {
   const router = useRouter()
-  const { user, isLoading } = useUser()
+  const { data, isLoading } = useUser()
 
   useEffect(() => {
-    if (!user && !isLoading) {
+    if (!data && !isLoading) {
       router.push("/")
     }
 
-    console.log("user logged", user)
-  }, [user, isLoading, router])
+  }, [])
 
   if (isLoading) {
     return <div>IsLoading</div>
@@ -26,7 +25,7 @@ const Home: NextPage = () => {
 
   return (
     <div className="mx-auto flex h-screen w-full ">
-      <Dashboard user={user} />
+      <Dashboard user={data?.session?.user} />
       <AddLink />
     </div>
   )

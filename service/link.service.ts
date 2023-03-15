@@ -13,10 +13,12 @@ export const LinkService = {
       console.log('error', error)
     }
   },
-  async create(title: string, desc: string, url: string, userId: string) {
-    const { error } = await supabase
-      .from('links')
-      .insert({ title: title, description: desc, url: url, user_id: userId })
+  async create(title: string, desc: string, url: string, userId: string | undefined) {
+    if (userId) {
+      const { error } = await supabase
+        .from('links')
+        .insert({ title: title, description: desc, url: url, user_id: userId })
+    }
   },
   async delete(url: string) {
     const { error } = await supabase

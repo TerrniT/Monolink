@@ -46,17 +46,17 @@ export const useModalStore = create(
   )
 )
 
-export const useAuthStore = create(
-  persist<AuthState>(
-    (set, get) => ({
-      user: null,
-      isAuth: false,
-      setUser: (user) => set({ user }),
-      setIsAuth: (isAuth: boolean) => set((state) => ({ isAuth })),
-    }),
-    {
-      name: 'auth-key', // unique name for this store
-      getStorage: () => localStorage, // default is localStorage
-    }
-  )
-)
+// export const useAuthStore = create(
+//   persist<AuthState>(
+//     (set, get) => ({
+//       user: null,
+//       isAuth: false,
+//       setUser: (user) => set({ user }),
+//       setIsAuth: (isAuth: boolean) => set((state) => ({ isAuth })),
+//     }),
+//     {
+//       name: 'auth-key', // unique name for this store
+//       getStorage: () => localStorage, // default is localStorage
+//     }
+//   )
+// )

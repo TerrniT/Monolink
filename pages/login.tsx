@@ -1,52 +1,21 @@
 import React, { useState } from 'react'
 import Button from '@/components/atoms/button'
 import Link from 'next/link'
-import { supabase } from '@/utils/supabaseClient'
-import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import { Provider } from "@supabase/supabase-js"
 import { AuthService } from '@/service/auth.service'
+import { useLogin } from '@/hooks/useLogin'
+
 
 const Login = () => {
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
-  const router = useRouter()
-  const [isLoading, setLoading] = useState<boolean>(false)
 
+  const { mutate, data, isLoading } = useLogin(password, email)
 
   const handleLogin = async (email: string, password: string) => {
-    try {
-      setLoading(true)
-      const error = AuthService.signInPassword(email, password)
-      if (error) {
-        throw error
-      } else {
-        router.push("/")
-      }
-    } catch (error) {
-      toast("Error", {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    } finally {
-      setLoading(false)
-    }
+    mutate({ email, password })
   }
-
-  // const handleInput = (e: any) => {
-  //   e.prevent.default
-  //   console.log(e.target.value)
-  //   setEmail(e.target.value)
-  //   setPassword(e.target.value)
-
-  //   console.log(email)
-  //   console.log(password)
-  // }
 
   const handleClick = (provider: Provider) => {
     AuthService.signInWithOAuth(provider)
@@ -81,7 +50,7 @@ const Login = () => {
                 </Link>
               </label>
             </div>
-            <Button title="Log In" className='bg-accent-green-second text-p text-black font-medium p-3' onClick={() => handleLogin(email, password)} />
+            <Button title="Log In" className='bg-accent-green-second text-p text-black font-medium p-3' onClick={() => handleLogin(email, password)} isLoading={isLoading} />
             <div className='flex items-center my-[34px]'>
               <div className='h-[1px] w-full bg-gray-stroke'></div>
               <p className='text-gray-500 uppercase font-medium px-2'>or</p>

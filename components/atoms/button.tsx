@@ -3,6 +3,7 @@ import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { IconType } from "react-icons/lib"
 import { ReactSVG } from "react-svg"
+import { AiOutlineLoading } from "react-icons/ai"
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -16,6 +17,7 @@ export interface ButtonProps
   title: string
   className?: string
   icon?: string
+  isLoading?: boolean
 }
 
 interface IconProps {
@@ -26,7 +28,7 @@ const Icon = ({ iconName }: IconProps) => {
   return <ReactSVG src={`${iconName}.svg`} className="w-6 h-6 object-contain" />
 }
 
-const Button: React.FC<ButtonProps> = ({ className, icon, title, ...props }) => {
+const Button: React.FC<ButtonProps> = ({ className, icon, title, isLoading, ...props }) => {
   return (
     <button
       className={cn(
@@ -36,7 +38,9 @@ const Button: React.FC<ButtonProps> = ({ className, icon, title, ...props }) => 
       {...props}
     >
       {icon && <Icon iconName={icon} />}
-      <p className='pl-2 mx-auto'>{title}</p>
+      {isLoading ? <AiOutlineLoading /> : (
+        <p className='pl-2 mx-auto'>{title}</p>
+      )}
     </button>
   )
 }
