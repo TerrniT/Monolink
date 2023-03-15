@@ -1,17 +1,16 @@
 import React, { useState } from 'react'
 import Button from '@/components/atoms/button'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { Provider } from "@supabase/supabase-js"
 import { AuthService } from '@/service/auth.service'
-import { useLogin } from '@/hooks/useLogin'
+import { useLogin } from '@/hooks/'
 
 
 const Login = () => {
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
 
-  const { mutate, data, isLoading } = useLogin(password, email)
+  const { mutate, isLoading } = useLogin(password, email)
 
   const handleLogin = async (email: string, password: string) => {
     mutate({ email, password })

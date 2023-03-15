@@ -4,19 +4,25 @@ import { LinkDef } from '@/types'
 // @ts-ignore
 import faviconFetch from 'favicon-fetch'
 import CardDropdownMenu from './CardDropdownMenu'
+import useOnHover from '@/hooks/useOnHover'
+import Indicator from './atoms/indicator'
 
 const Cardlink = (props: LinkDef) => {
+  const { isShown, handleMouseEnter, handleMouseOut } = useOnHover()
 
   return (
     <div
       key={props.id}
-      className="shadow-1xl relative min-h-[10rem] rounded-2xl bg-black/30 ring-1 ring-white/10 "
+      className="shadow-1xl relative min-h-[10rem] rounded-2xl bg-black/30 ring-1 ring-white/10 hover:ring-2 hover:ring-white duration-100 transition-all "
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseOut}
     >
-      <div className="relative  flex h-full flex-col justify-between  ">
-        <div className="flex items-center  justify-between px-6 py-4 relative ">
+      {isShown && <Indicator url={props.url} />}
+      <div className=" flex h-full flex-col justify-between  ">
+        <div className="flex items-center  justify-between px-6 py-4  ">
           <div className="w-full flex justify-between ">
             <div className="flex items-center w-full ">
-              <div className="relative flex h-8 w-8 flex-shrink-0 ">
+              <div className=" flex h-8 w-8 flex-shrink-0 ">
                 <a
                   href={props.url}
                   rel="noreferrer"
@@ -24,7 +30,7 @@ const Cardlink = (props: LinkDef) => {
                   className="block self-center"
                 >
                   <Image
-                    src={faviconFetch({ uri: props.url })}
+                    src={props.url ? faviconFetch({ uri: props.url }) : "/monolink-rev.svg"}
                     width={26}
                     height={26}
                     className="object-contain "

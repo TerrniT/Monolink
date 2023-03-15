@@ -1,14 +1,13 @@
 import React from 'react'
 import { data, datafooter } from '../utils/data'
-import useSidevar from '@/hooks/useSidevar'
+import { useSidebar } from '@/hooks/'
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { BsFillArrowLeftSquareFill, BsFillArrowRightSquareFill } from 'react-icons/bs'
 
-type Props = {}
 
-const DashboardSidebar = (props: Props) => {
-  const { active, showMore, showLess, controls, controlText, controlTitleText } = useSidevar()
+const DashboardSidebar = () => {
+  const { active, showMore, showLess, controls, controlText, controlTitleText } = useSidebar()
   return (
     <motion.div
       animate={controls}

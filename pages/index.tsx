@@ -1,20 +1,21 @@
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
-import useUser from "../hooks/useUser"
 import Dashboard from './dashboard'
 import 'react-toastify/dist/ReactToastify.css';
 import { AddLink } from '@/components'
+import { useSession } from "@/hooks/"
 
 
 const Home: NextPage = () => {
   const router = useRouter()
-  const { data, isLoading } = useUser()
+  const { data, isLoading } = useSession()
 
   useEffect(() => {
     if (!data && !isLoading) {
       router.push("/")
     }
+    console.log(data);
 
   }, [])
 

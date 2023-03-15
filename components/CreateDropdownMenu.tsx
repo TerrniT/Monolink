@@ -1,9 +1,7 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { FaEdit } from 'react-icons/fa'
-import { MdOutlineFileCopy } from 'react-icons/md'
 import { BsPlus } from 'react-icons/bs'
-import AddLink from './AddLink'
 import { useModalStore } from '@/store/store'
 
 const CreateDropdownMenu = () => {

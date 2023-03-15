@@ -7,15 +7,12 @@ import { toast } from "react-toastify"
 
 const useLogin = (email: string, password: string) => {
 
-  const queryClient = useQueryClient()
-
   const router = useRouter()
 
-  const { data, error, isLoading, mutate } = useMutation(
+  const { data, error, isLoading, mutate } = useMutation(['session'],
     {
       mutationFn: (data: { email: string; password: string }) => AuthService.signInPassword(password, email),
       onSuccess: () => {
-        queryClient.invalidateQueries()
         router.push('/')
       },
       onError: () => {

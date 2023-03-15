@@ -1,4 +1,4 @@
-import useCopyToClipboard from '@/hooks/useCopyToClipboard'
+import { useCopyToClipboard } from '@/hooks/'
 import { LinkService } from '@/service/link.service'
 import { LinkDef } from '@/types'
 import { Menu, Transition } from '@headlessui/react'
@@ -10,11 +10,11 @@ import { FaEdit } from 'react-icons/fa'
 import { MdOutlineFileCopy } from 'react-icons/md'
 import { toast } from 'react-toastify'
 
-const CardDropdownMenu = ({ url }: LinkDef) => {
+const CardDropdownMenu = (props: LinkDef) => {
   const [value, copy] = useCopyToClipboard()
   const queryClient = useQueryClient()
 
-  const { mutate } = useMutation(['links'], () => LinkService.delete(url), {
+  const { mutate } = useMutation(['links'], () => LinkService.delete(props.id), {
     onSuccess: () => {
       queryClient.invalidateQueries()
     }
@@ -33,11 +33,8 @@ const CardDropdownMenu = ({ url }: LinkDef) => {
     });
   }
 
-
-
-
   return (
-    <div className="abosolute top-0 w-56 text-right">
+    <div className="abosolute top-0  text-right">
       <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button className=" rotate-90 inline-flex w-full justify-center rounded-md px-2 py-2 text-xs font-medium text-white hover:bg-zinc-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
@@ -56,13 +53,13 @@ const CardDropdownMenu = ({ url }: LinkDef) => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y  divide-zinc-800 rounded-md bg-black/50 backdrop-blur-md  ring-1 ring-gray-100 shadow-lg ring-opacity-5 focus:outline-none">
-            <Menu.Item>
+          <Menu.Items className="absolute right-0 mt-2 p-1 gap-1 flex flex-col w-36 origin-top-right  rounded-md bg-black/50 backdrop-blur-xl  ring-1 ring-gray-100 shadow-lg ring-opacity-5 focus:outline-none">
+            <Menu.Item >
               {({ active }) => (
                 <button
-                  onClick={() => copy(url)}
+                  onClick={() => copy(props.url)}
                   className={`${active ? 'bg-zinc-800 rounded-t text-white' : 'text-gray-300'
-                    } group flex w-full transition-all duration-200 items-center px-2 py-2 text-xs`}
+                    } flex w-full transition-all duration-200 items-center px-2 py-2 text-xs self-center`}
                 >
                   {active ? (
                     <MdOutlineFileCopy
@@ -83,7 +80,7 @@ const CardDropdownMenu = ({ url }: LinkDef) => {
               {({ active }) => (
                 <button
                   className={`${active ? 'bg-zinc-800 text-white' : 'text-gray-300'
-                    } group flex w-full items-center  px-2 py-2 text-xs`}
+                    }  flex w-full items-center px-2 py-2 text-xs `}
                 >
                   {active ? (
                     <FaEdit
@@ -104,8 +101,8 @@ const CardDropdownMenu = ({ url }: LinkDef) => {
               {({ active }) => (
                 <button
                   onClick={handleDelete}
-                  className={`${active ? 'bg-red-500/10 ring-1 ring-red-500 text-red-500' : 'text-gray-300'
-                    } group flex w-full items-center rounded-b px-2 py-2 text-xs`}
+                  className={`${active ? 'bg-red-500/10' : ''
+                    } group flex w-full items-center rounded-b px-2 py-2 text-xs text-red-500 `}
                 >
                   {active ? (
                     <AiFillDelete
@@ -114,7 +111,7 @@ const CardDropdownMenu = ({ url }: LinkDef) => {
                     />
                   ) : (
                     <AiFillDelete
-                      className="mr-2 h-5 w-5 text-gray-300"
+                      className="mr-2 h-5 w-5 text-red-500"
                       aria-hidden="true"
                     />
                   )}

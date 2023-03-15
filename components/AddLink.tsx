@@ -1,33 +1,37 @@
 import { useModalStore } from '@/store/store'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
-import useUser from "hooks/useUser"
+import { useSession } from "@/hooks/"
 import { MdClose } from 'react-icons/md'
 import { toast } from 'react-toastify'
 import { LinkService } from '@/service/link.service'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+// @ts-ignore
+import { CirclePicker } from "react-color"
 
 const AddLink: React.FC = () => {
+
   const { open, setOpen } = useModalStore((state) => ({
     open: state.open,
     setOpen: state.setOpen,
   }))
-  const { user } = useUser()
+  const { data } = useSession()
 
+  const [color, setColor] = useState<string>("")
   const [title, setTitle] = useState<string>('')
   const [desc, setDesc] = useState<string>('')
   const [url, setUrl] = useState<string>('')
 
   const queryClient = useQueryClient()
 
-  const { mutate } = useMutation(['links'], () => LinkService.create(title, desc, url, user.id), {
+  const { mutate } = useMutation(['links'], () => LinkService.create(title, desc, url, data.session?.user.id, color), {
     onSuccess: () => {
       queryClient.invalidateQueries()
     }
   })
 
   const handleLink = async () => {
-    if (user) {
+    if (data?.session?.user) {
       mutate()
     } else {
       toast("Error", {
@@ -124,6 +128,17 @@ const AddLink: React.FC = () => {
                           <p className='text-accent-green font-bold'>*</p>
                         </div>
                         <input className='bg-transparent rounded-[10px] border-[1px] border-gray-stroke placeholder:text-gray-stroke text-xs p-3' type="text" placeholder='Paste url' value={url} onChange={(e: any) => setUrl(e.target.value)} />
+                      </div>
+
+                      <div className='flex flex-col gap-1 mb-4'>
+                        <div className='flex gap-1'>
+                          <label className='text-white font-medium text-md'>Chose color
+                          </label>
+                          <p className='text-accent-green font-bold'>*</p>
+                        </div>
+                        <div className='w-full'>
+                          <CirclePicker color={color} onChange={(e: any) => setColor(e.hex)} />
+                        </div>
                       </div>
                     </div>
                   </Dialog.Panel>

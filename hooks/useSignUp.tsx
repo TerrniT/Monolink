@@ -9,7 +9,7 @@ const useSignUp = () => {
   const queryClient = useQueryClient()
 
 
-  const { data: error, isLoading, mutate } = useMutation(
+  const { data: error, isLoading, mutate } = useMutation(['session'],
     {
       mutationFn: (email: string) => AuthService.signUpWithMagicLink(email),
       onSuccess: () => {
@@ -22,7 +22,6 @@ const useSignUp = () => {
           draggable: true,
           progress: undefined,
         });
-        queryClient.invalidateQueries()
       },
       onError: () => {
         toast.error("Error", {

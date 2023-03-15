@@ -5,6 +5,9 @@ import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { LinkDef } from "@/types";
 import { FiSearch } from "react-icons/fi"
+// @ts-ignore
+import faviconFetch from 'favicon-fetch'
+import Indicator from "./atoms/indicator";
 
 interface Props {
   data?: LinkDef[]
@@ -91,20 +94,42 @@ export default function CommandPallete({ data }: Props) {
                     >
                       {({ active }) => (
                         <div
-                          className={`px-4 py-2 ${!active
-                            ? "bg-black/10 "
-                            : "bg-white/20 dark:bg-dark-transparent/80  "
-                            } rounded-xl`}
+                          className={`px-3 py-2 ${!active
+                            ? "bg-black/10 border border-transparent"
+                            : "bg-zinc-900/70 border border-zinc-800 "
+                            } rounded-xl relative `}
                         >
-                          <span
-                            className={`text-medium pr-2 ${!active
-                              ? "dark:text-white text-black font-medium"
-                              : "text-light-acsent dark:text-dark-acsent font-medium"
-                              }`}
-                          >
-                            {data.title}
-                          </span>
-                          <span className="text-black dark:text-gray-600 text-xs">
+                          <div className="flex justify-between">
+                            <div className="flex gap-2 items-center">
+                              {data.url ? (
+                                <Image
+                                  src={faviconFetch({ uri: data.url })}
+                                  width={23}
+                                  height={23}
+                                  className="object-contain "
+                                  alt={data.title}
+                                  aria-hidden
+                                />
+                              ) : (
+                                <div className="w-4 h-4 rounded-full" style={{ backgroundColor: `${data.color}` }}></div>
+                              )}
+                              <span
+                                className={`text-medium pr-2 ${!active
+                                  ? "text-white font-medium"
+                                  : "font-medium"
+                                  }`}
+                              >
+                                {data.title}
+                              </span>
+                            </div>
+                            <div>
+                              <span className="text-zinc-200 px-1 mr-2 font-bold py-1 rounded-full text-[12px]" style={{ backgroundColor: `${data.color}` }}>
+                                {data.group_tag}
+                              </span>
+                              {active && <Indicator url={data.url} />}
+                            </div>
+                          </div>
+                          <span className="text-gray-400 text-xs truncate block">
                             {data.description}
                           </span>
                         </div>

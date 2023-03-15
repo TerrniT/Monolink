@@ -1,14 +1,9 @@
-import { supabase } from '@/utils/supabaseClient'
-import { useRouter } from 'next/router'
+import { AuthService } from '@/service/auth.service'
 
 const SignOut = () => {
-  const router = useRouter()
 
   const handleSubmit = async () => {
-
-    const { error } = await supabase.auth.signOut()
-    router.push("/login")
-
+    AuthService.signOut()
   }
 
   return (
