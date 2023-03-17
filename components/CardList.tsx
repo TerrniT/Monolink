@@ -16,8 +16,7 @@ const CardList = ({ data }: Props) => {
           title={link.title}
           description={link.description}
           url={link.url}
-          color={link.color}
-          group_tag={link.group_tag}
+          tags={link.tags}
         />
       ))}
     </>

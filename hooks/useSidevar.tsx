@@ -21,15 +21,16 @@ const useSidevar = (): SidebarProps => {
   const showMore = () => {
     controls.start({
       width: '250px',
-      transition: { duration: 0.001 },
+      transition: { duration: 0.004 },
     })
     controlText.start({
       opacity: 1,
       display: 'block',
-      transition: { delay: 0.3 },
+      transition: { delay: 0.2 },
     })
     controlTitleText.start({
       opacity: 1,
+      display: 'block',
       transition: { delay: 0.3 },
     })
 
@@ -38,7 +39,7 @@ const useSidevar = (): SidebarProps => {
 
   const showLess = () => {
     controls.start({
-      width: '125px',
+      width: '110px',
       transition: { duration: 0.001 },
     })
 
@@ -48,6 +49,7 @@ const useSidevar = (): SidebarProps => {
     })
 
     controlTitleText.start({
+      display: 'none',
       opacity: 0,
     })
 

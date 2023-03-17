@@ -1,13 +1,24 @@
 import { useModalStore } from '@/store/store'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
-import { useSession } from "@/hooks/"
+import { useSession, useAddLink } from "@/hooks/"
 import { MdClose } from 'react-icons/md'
-import { toast } from 'react-toastify'
-import { LinkService } from '@/service/link.service'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-// @ts-ignore
+import { SubmitHandler, useForm } from "react-hook-form"
+// @ts-ignore-line
 import { CirclePicker } from "react-color"
+import TagInput from './TagInput'
+import { createLink } from '@/service/link.service'
+
+export interface IFormValues {
+  id: string
+  title: string;
+  description: string;
+  url: string;
+  tags: {
+    color: string,
+    tag_name: string
+  }
+}
 
 const AddLink: React.FC = () => {
 
@@ -15,36 +26,41 @@ const AddLink: React.FC = () => {
     open: state.open,
     setOpen: state.setOpen,
   }))
-  const { data } = useSession()
+
+  const { userId } = useSession()
 
   const [color, setColor] = useState<string>("")
-  const [title, setTitle] = useState<string>('')
-  const [desc, setDesc] = useState<string>('')
-  const [url, setUrl] = useState<string>('')
+  const [tags, setTags] = useState<string>("");
 
-  const queryClient = useQueryClient()
+  const { register, reset, handleSubmit } = useForm<IFormValues>()
 
-  const { mutate } = useMutation(['links'], () => LinkService.create(title, desc, url, data.session?.user.id, color), {
-    onSuccess: () => {
-      queryClient.invalidateQueries()
-    }
-  })
+  const { mutate } = useAddLink()
 
-  const handleLink = async () => {
-    if (data?.session?.user) {
-      mutate()
-    } else {
-      toast("Error", {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+  const onSubmit: SubmitHandler<IFormValues> = async (formData) => {
+    if (userId) {
+      const innerObj = formData.tags;
+
+      const modifiedInnerObj = {
+        ...innerObj,
+        color: color
+      };
+
+      const modifiedOuterObj = {
+        ...formData,
+        tags: modifiedInnerObj
+      };
+
+      mutate({
+        data: modifiedOuterObj, userId: userId
+      })
+
+      reset()
+      setTags("")
+      setOpen()
     }
   }
+
+
 
   return (
     <>
@@ -106,51 +122,53 @@ const AddLink: React.FC = () => {
                     Lorem ipsum dolor sit amet, officia excepteur ex fugiat
                   </Dialog.Description>
                   <Dialog.Panel>
-                    <div className='flex flex-col gap-4'>
-                      <div className='flex flex-col gap-1 '>
-                        <div className='flex gap-1'>
-                          <label className='text-white font-medium text-md'>Title</label>
-                          <p className='text-accent-green font-bold'>*</p>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      <div className='flex flex-col gap-4' >
+                        <div className='flex flex-col gap-1 '>
+                          <div className='flex gap-1'>
+                            <label className='text-white font-medium text-md'>Title</label>
+                            <p className='text-accent-green font-bold'>*</p>
+                          </div>
+                          <input {...register("title")} className='bg-transparent rounded-[10px] border-[1px] border-gray-stroke placeholder:text-gray-stroke text-xs p-3' type="text" placeholder='Type title' />
                         </div>
-                        <input className='bg-transparent rounded-[10px] border-[1px] border-gray-stroke placeholder:text-gray-stroke text-xs p-3' type="text" placeholder='Type title' value={title} onChange={(e: any) => setTitle(e.target.value)} />
-                      </div>
 
-                      <div className='flex flex-col gap-1 '>
-                        <div className='flex gap-1'>
-                          <label className='text-white font-medium text-md'>Description</label>
+                        <div className='flex flex-col gap-1 '>
+                          <div className='flex gap-1'>
+                            <label className='text-white font-medium text-md'>Description</label>
+                          </div>
+                          <input {...register("description")} className='bg-transparent rounded-[10px] border-[1px] border-gray-stroke placeholder:text-gray-stroke text-xs p-3' type="text" placeholder='Type description' />
                         </div>
-                        <input className='bg-transparent rounded-[10px] border-[1px] border-gray-stroke placeholder:text-gray-stroke text-xs p-3' type="text" placeholder='Type description' value={desc} onChange={(e: any) => setDesc(e.target.value)} />
-                      </div>
+                        <div className='flex flex-col gap-1 mb-4'>
+                          <div className='flex gap-1'>
+                            <label className='text-white font-medium text-md'>URL</label>
+                            <p className='text-accent-green font-bold'>*</p>
+                          </div>
+                          <input {...register("url")} className='bg-transparent rounded-[10px] border-[1px] border-gray-stroke placeholder:text-gray-stroke text-xs p-3' type="text" placeholder='Paste url' />
+                        </div>
 
-                      <div className='flex flex-col gap-1 mb-4'>
-                        <div className='flex gap-1'>
-                          <label className='text-white font-medium text-md'>URL</label>
-                          <p className='text-accent-green font-bold'>*</p>
+                        <div className='flex flex-col gap-1 mb-4'>
+                          <div className='flex gap-1'>
+                            <label className='text-white font-medium text-md'>Chose color</label>
+                            <p className='text-accent-green font-bold'>*</p>
+                          </div>
+                          <div className='w-full'>
+                            <CirclePicker color={color} onChange={(e: any) => setColor(e.hex)} />
+                          </div>
+                          <TagInput color={color} register={register} setTags={setTags} tags={tags} />
                         </div>
-                        <input className='bg-transparent rounded-[10px] border-[1px] border-gray-stroke placeholder:text-gray-stroke text-xs p-3' type="text" placeholder='Paste url' value={url} onChange={(e: any) => setUrl(e.target.value)} />
-                      </div>
 
-                      <div className='flex flex-col gap-1 mb-4'>
-                        <div className='flex gap-1'>
-                          <label className='text-white font-medium text-md'>Chose color
-                          </label>
-                          <p className='text-accent-green font-bold'>*</p>
-                        </div>
-                        <div className='w-full'>
-                          <CirclePicker color={color} onChange={(e: any) => setColor(e.hex)} />
+                        <div className="mt-4 flex px-6 justify-end gap-4">
+                          <button
+                            type="submit"
+                            className="inline-flex justify-center rounded-md  bg-accent-green/20 px-6 py-2 text-sm font-medium text-accent-green-second border border-accent-green hover:bg-accent-green hover:text-black duration-100 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2"
+                          >
+                            Create a card
+                          </button>
                         </div>
                       </div>
-                    </div>
+                    </form>
+
                   </Dialog.Panel>
-                </div>
-                <div className="mt-4 flex px-6 justify-end gap-4">
-                  <button
-                    type="button"
-                    onClick={() => handleLink()}
-                    className="inline-flex justify-center rounded-md  bg-accent-green/20 px-6 py-2 text-sm font-medium text-accent-green-second border border-accent-green hover:bg-accent-green hover:text-black duration-100 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 focus-visible:ring-offset-2"
-                  >
-                    Create a card
-                  </button>
                 </div>
               </div>
             </Transition.Child>

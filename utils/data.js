@@ -1,83 +1,11 @@
-import {
-  BsSearch,
-  BsEyeFill,
-  BsBookmarkFill,
-  BsFillArrowLeftSquareFill,
-  BsPeopleFill,
-  BsTerminalFill,
-  BsFillArrowRightSquareFill,
-} from 'react-icons/bs'
-
-import { AiFillFire, AiFillMessage } from 'react-icons/ai'
-import { IoMdArrowRoundUp } from 'react-icons/io'
-import { MdNightlightRound, MdFeedback } from 'react-icons/md'
-import { FaCog } from 'react-icons/fa'
+import { IoFileTrayStackedOutline } from "react-icons/io5"
+import { FiSettings } from 'react-icons/fi'
+import { BsCommand } from "react-icons/bs"
 
 export const data = [
   {
-    name: 'Discover',
-    items: [
-      {
-        title: 'Popular',
-        icon: AiFillFire,
-      },
-      {
-        title: 'Most Upvoted',
-        icon: IoMdArrowRoundUp,
-      },
-      {
-        title: 'Best Discussions',
-        icon: AiFillMessage,
-      },
-      {
-        title: 'Search',
-        icon: BsSearch,
-      },
-    ],
-  },
-  {
-    name: 'Manage',
-    items: [
-      {
-        title: 'Bookmarks',
-        icon: BsBookmarkFill,
-      },
-      {
-        title: 'Reading history',
-        icon: BsEyeFill,
-      },
-      {
-        title: 'Focus Mode',
-        icon: MdNightlightRound,
-      },
-      {
-        title: 'Customize',
-        icon: FaCog,
-      },
-    ],
+    title: 'Groups',
+    icon: IoFileTrayStackedOutline,
   },
 ]
 
-export const datafooter = [
-  {
-    name: '',
-    items: [
-      {
-        title: 'Docs',
-        icon: BsBookmarkFill,
-      },
-      {
-        title: 'Changelog',
-        icon: BsTerminalFill,
-      },
-      {
-        title: 'Feedback',
-        icon: MdFeedback,
-      },
-      {
-        title: 'Invite people',
-        icon: BsPeopleFill,
-      },
-    ],
-  },
-]

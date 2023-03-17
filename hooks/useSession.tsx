@@ -8,15 +8,19 @@ type UseUserType = {
     session: Session | null
     error: AuthError | null
   } | undefined
+  userId: string | undefined
 }
 
 const useSession = (): UseUserType => {
 
   const { data, isLoading } = useQuery(['session'], () => AuthService.getSession())
 
+  const userId = data?.session?.user.id
+
   return {
     isLoading,
-    data
+    data,
+    userId
   };
 };
 

@@ -27,7 +27,6 @@ export default function CommandPallete({ data }: Props) {
         handleOpen();
       }
     }
-    console.log("re-rerender");
 
     window.addEventListener("keydown", onKeydown);
     return () => {
@@ -111,7 +110,7 @@ export default function CommandPallete({ data }: Props) {
                                   aria-hidden
                                 />
                               ) : (
-                                <div className="w-4 h-4 rounded-full" style={{ backgroundColor: `${data.color}` }}></div>
+                                <div className="w-4 h-4 rounded-full" style={{ backgroundColor: `${data.tags.color}` }}></div>
                               )}
                               <span
                                 className={`text-medium pr-2 ${!active
@@ -123,8 +122,8 @@ export default function CommandPallete({ data }: Props) {
                               </span>
                             </div>
                             <div>
-                              <span className="text-zinc-200 px-1 mr-2 font-bold py-1 rounded-full text-[12px]" style={{ backgroundColor: `${data.color}` }}>
-                                {data.group_tag}
+                              <span className="text-zinc-200 px-1 mr-2 font-bold py-1 rounded-full text-[12px]" style={{ backgroundColor: `${data.tags.color}` }}>
+                                {data.tags.tag_name}
                               </span>
                               {active && <Indicator url={data.url} />}
                             </div>

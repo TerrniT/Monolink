@@ -1,5 +1,5 @@
 import { useCopyToClipboard } from '@/hooks/'
-import { LinkService } from '@/service/link.service'
+import { deleteLink } from '@/service/link.service'
 import { LinkDef } from '@/types'
 import { Menu, Transition } from '@headlessui/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -14,7 +14,7 @@ const CardDropdownMenu = (props: LinkDef) => {
   const [value, copy] = useCopyToClipboard()
   const queryClient = useQueryClient()
 
-  const { mutate } = useMutation(['links'], () => LinkService.delete(props.id), {
+  const { mutate } = useMutation(['links'], () => deleteLink(props.id), {
     onSuccess: () => {
       queryClient.invalidateQueries()
     }
