@@ -5,6 +5,7 @@ import Dashboard from './dashboard'
 import 'react-toastify/dist/ReactToastify.css';
 import { AddLink } from '@/components'
 import { useSession } from "@/hooks/"
+import Loading from './loading';
 
 
 const Home: NextPage = () => {
@@ -15,12 +16,10 @@ const Home: NextPage = () => {
     if (!data && !isLoading) {
       router.push("/")
     }
-    console.log(data);
-
   }, [])
 
   if (isLoading) {
-    return <div>IsLoading</div>
+    return <Loading />
   }
 
 
