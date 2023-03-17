@@ -7,6 +7,7 @@ import Image from "next/image"
 const Profile = () => {
 
   const { controlText, controls } = useSidebar()
+
   return (
 
     <motion.div className="flex gap-2" animate={controls} >

@@ -17,16 +17,15 @@ const CardContainer = ({ user }: Props) => {
   const { data, isLoading } = useQuery(['links'], () => getLinks(user.id))
 
   return (
-    <motion.div className="animate min-h-screen rounded-l-xl ring-1 ring-zinc-800 flex-1 flex-col bg-zinc-900 w-full  duration-300 relative">
-      <Navbar />
-      <motion.div className="animate flex-1 bg-zinc-900 px-3 duration-300 ">
+    <>
+      <motion.div className="min-h-screen flex-1 bg-zinc-900 px-3 duration-300  ">
         <div className=" w-full pt-6 grid grid-cols-4 gap-4">
           {isLoading ? (<SkeletonCardList />) : (<CardList data={data} />)}
         </div>
       </motion.div>
       <CommandPallete data={data} />
       <HelpPopover />
-    </motion.div>
+    </>
   )
 }
 
