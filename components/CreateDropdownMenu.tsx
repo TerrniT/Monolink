@@ -3,6 +3,7 @@ import { Fragment } from 'react'
 import { FaEdit } from 'react-icons/fa'
 import { BsPlus } from 'react-icons/bs'
 import { useModalStore } from '@/store/store'
+import { useSidebar } from '@/hooks'
 
 const CreateDropdownMenu = () => {
 
@@ -10,15 +11,25 @@ const CreateDropdownMenu = () => {
     open: state.open,
     setOpen: state.setOpen,
   }))
+
+  const { active, showMore, showLess, controls, controlText, controlTitleText } = useSidebar()
+
   return (
     <Menu as="div" className="relative">
-      <Menu.Button
-        title="Add link"
-        className="my-auto flex w-32 items-center justify-center rounded-lg bg-accent-green-second hover:bg-accent-green duration-100 transition-all px-3 py-2"
-      >
-        <BsPlus className="text-2xl text-black" />
-        <p className='font-medium text-black text-sm'>Add new</p>
+
+
+      <Menu.Button className="my-2 h-10 flex w-full text-gray-500 transition-all duration-150 ring-1 ring-transparent   hover:ring-accent-green py-2 items-center justify-between rounded-md" >
+        <div className='flex items-center'>
+          <div className='w-9'>
+            <BsPlus className=" mx-auto text-xl text-accent-green mr-2 bg-accent-green/20 rounded-md" />
+          </div>
+          {active && (
+            <p className='font-medium text-accent-green text-sm'>Add new</p>
+          )}
+
+        </div>
       </Menu.Button>
+
       <Transition
         as={Fragment}
         enter="transition ease-out duration-100"

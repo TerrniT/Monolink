@@ -4,7 +4,11 @@ import { BsCommand } from "react-icons/bs"
 
 export const data = [
   {
-    title: 'Groups',
+    title: 'Updates & FAQ',
+    icon: IoFileTrayStackedOutline,
+  },
+  {
+    title: 'Settings',
     icon: IoFileTrayStackedOutline,
   },
 ]

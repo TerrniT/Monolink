@@ -25,6 +25,7 @@ const TagInput = ({ color, tags, setTags, register }: Props) => {
   };
 
   const removeTag = () => {
+    setTags("")
     setIsExist(false)
   };
 

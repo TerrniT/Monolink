@@ -8,7 +8,6 @@ type SidebarProps = {
   showLess: () => void
   showMore: () => void
   active: boolean
-
 }
 
 const useSidebar = (): SidebarProps => {
@@ -73,4 +72,4 @@ const useSidebar = (): SidebarProps => {
   )
 }
 
-export default useSidebar 
+export default useSidebar

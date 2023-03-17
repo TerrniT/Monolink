@@ -5,7 +5,9 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { BsFillArrowLeftSquareFill, BsFillArrowRightSquareFill } from 'react-icons/bs'
 import CommandButton from './atoms/sidebar-atoms/CommandButton'
-import { FiSearch, FiSettings } from 'react-icons/fi'
+import { FiLink, FiSearch, FiSettings } from 'react-icons/fi'
+import AddLink from './AddLink'
+import CreateDropdownMenu from './CreateDropdownMenu'
 
 
 const DashboardSidebar = () => {
@@ -60,10 +62,11 @@ const DashboardSidebar = () => {
       <div className={`h-[2px] ${!active ? "bg-zinc-700" : "bg-transparent"}  w-10 ml-6 mt-4 self-start rounded transition-all duration-300`}></div>
 
       <div className="px-6 mt-2">
-        <CommandButton title='Settings' icon={<FiSearch className='w-10 text-xl' />} command="K" />
+        <CommandButton title='Links' icon={<FiLink className='w-10 text-md' />} command="" />
+        <CommandButton title='Search' icon={<FiSearch className='w-10 text-md' />} command="K" />
         {data.map((item, index) => (
           <button key={index} className="my-2 flex w-full text-gray-500 transition-all duration-150  hover:text-gray-50 hover:bg-zinc-700 py-2 items-center justify-start rounded-md" >
-            <item.icon className="text-xl  w-10" />
+            <item.icon className="text-md  w-10" />
             <motion.p
               animate={controlTitleText}
               className="text-sm font-semibold block"
@@ -72,6 +75,8 @@ const DashboardSidebar = () => {
             </motion.p>
           </button>
         ))}
+
+        <CreateDropdownMenu />
       </div>
 
     </motion.div >
