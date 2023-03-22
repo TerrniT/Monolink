@@ -32,8 +32,8 @@ const CommandButton = ({ icon, command, title, controls, controlTitleText }: Pro
       </motion.div>
       {command && (
         <div className='flex items-center gap-1 text-gray-300 pr-2 text-[12px]'>
-          <motion.p animate={controlTitleText} className='flex items-center p-1 justify-center text-center  bg-zinc-700 rounded border border-zinc-400'><FiCommand /></motion.p>
-          <motion.p animate={controlTitleText} className=' px-2 py-0.5 bg-zinc-700 rounded border border-zinc-400'>{command}</motion.p>
+          <motion.p animate={controlTitleText} className='flex items-center p-1 justify-center text-center  bg-zinc-700/20 rounded border border-zinc-700'><FiCommand /></motion.p>
+          <motion.p animate={controlTitleText} className=' px-2 py-0.5 bg-zinc-700/20 rounded border border-zinc-700'>{command}</motion.p>
         </div>
       )}
     </button>

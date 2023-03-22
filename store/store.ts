@@ -11,13 +11,6 @@ interface CmdState {
   setOpen: () => void
 }
 
-interface AuthState {
-  user: null
-  isAuth: boolean
-  setIsAuth: (isAuth: boolean) => void
-  setUser: (user: any) => void
-}
-
 
 export const useCmdStore = create<CmdState>()(
   devtools(
@@ -46,17 +39,3 @@ export const useModalStore = create(
   )
 )
 
-// export const useAuthStore = create(
-//   persist<AuthState>(
-//     (set, get) => ({
-//       user: null,
-//       isAuth: false,
-//       setUser: (user) => set({ user }),
-//       setIsAuth: (isAuth: boolean) => set((state) => ({ isAuth })),
-//     }),
-//     {
-//       name: 'auth-key', // unique name for this store
-//       getStorage: () => localStorage, // default is localStorage
-//     }
-//   )
-// )

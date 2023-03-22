@@ -49,7 +49,7 @@ const DashboardSidebar = () => {
       </div>
       {active && (
         <div
-          className="absolute -right-3 top-12 z-40 hidden h-8 w-8 cursor-pointer text-2xl text-white group-hover:block "
+          className="absolute -right-3 top-12 z-40 hidden h-8 w-8 cursor-pointer text-md text-white group-hover:block "
           onClick={showLess}
         >
           <BsFillArrowLeftSquareFill className=" text-white " />
@@ -58,7 +58,7 @@ const DashboardSidebar = () => {
       {!active && (
         <BsFillArrowRightSquareFill
           onClick={showMore}
-          className="absolute -right-3 top-12 z-40 cursor-pointer text-2xl text-white group-hover:block hidden"
+          className="absolute -right-4 top-12 z-40 cursor-pointer text-md text-white group-hover:block hidden"
         />
       )}
       <div className={`h-[2px] ${!active ? "bg-zinc-700" : "bg-transparent"}  w-10 ml-6 mt-4 self-start rounded transition-all duration-300`}></div>
