@@ -19,5 +19,11 @@ module.exports = {
   daisyui: {
     themes: ['black'],
   },
-  plugins: [require('@tailwindcss/forms'), require('daisyui'), require('tailwind-scrollbar')],
+  plugins: [require('@tailwindcss/forms'), require('daisyui'), require('tailwind-scrollbar'), require('@headlessui/tailwindcss')],
+
+
+
+
+
+
 }

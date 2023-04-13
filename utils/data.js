@@ -1,6 +1,4 @@
-import { IoFileTrayStackedOutline } from "react-icons/io5"
-import { FiSettings } from 'react-icons/fi'
-import { BsCommand } from "react-icons/bs"
+import { IoFileTrayStackedOutline, IoSettingsSharp } from "react-icons/io5"
 
 export const data = [
   {
@@ -9,7 +7,7 @@ export const data = [
   },
   {
     title: 'Settings',
-    icon: IoFileTrayStackedOutline,
+    icon: IoSettingsSharp,
   },
 ]
 

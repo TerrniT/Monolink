@@ -11,6 +11,13 @@ interface CmdState {
   setOpen: () => void
 }
 
+interface FilterViewState {
+  listView: boolean
+  cardView: boolean
+  setListView: () => void
+  setCardView: () => void
+}
+
 
 export const useCmdStore = create<CmdState>()(
   devtools(
@@ -33,9 +40,25 @@ export const useModalStore = create(
       setOpen: () => set((state) => ({ open: !state.open })),
     }),
     {
-      name: 'new-key', // unique name for this store
-      getStorage: () => localStorage, // default is localStorage
+      name: 'modal-key',
+      getStorage: () => localStorage,
     }
   )
 )
 
+
+export const useFilterViewStore = create(
+  persist<FilterViewState>(
+    (set) => ({
+      listView: false,
+      cardView: true,
+      setListView: () => set(() => ({ listView: true, cardView: false })),
+      setCardView: () => set(() => ({ listView: false, cardView: true }))
+    }),
+    {
+      name: 'filter-key',
+      getStorage: () => localStorage
+    }
+
+  )
+)

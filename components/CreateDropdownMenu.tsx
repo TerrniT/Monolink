@@ -5,7 +5,6 @@ import { BsPlus } from 'react-icons/bs'
 import { useModalStore } from '@/store/store'
 import { motion } from "framer-motion"
 import { AnimationControls } from 'framer-motion'
-import { FiCommand } from 'react-icons/fi'
 
 interface Props {
   controlTitleText: AnimationControls

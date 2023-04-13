@@ -1,16 +1,16 @@
 import { LinkDef } from '@/types'
 import React from 'react'
-import Cardlink from './cardlink'
+import LinkRow from '../LinkRow'
 
 type Props = {
   data: LinkDef[] | undefined
 }
 
-const CardList = ({ data }: Props) => {
+const ListView = ({ data }: Props) => {
   return (
     <>
       {data?.map((link: LinkDef) => (
-        <Cardlink
+        <LinkRow
           key={link.id}
           id={link.id}
           title={link.title}
@@ -23,5 +23,5 @@ const CardList = ({ data }: Props) => {
   )
 }
 
-export default CardList
+export default ListView
 

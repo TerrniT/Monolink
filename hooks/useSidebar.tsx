@@ -48,8 +48,9 @@ const useSidebar = (): SidebarProps => {
     })
 
     controlTitleText.start({
-      display: 'none',
       opacity: 0,
+
+      display: 'none',
     })
 
     setActive(false)

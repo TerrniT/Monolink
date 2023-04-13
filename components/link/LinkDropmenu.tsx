@@ -10,7 +10,7 @@ import { FaEdit } from 'react-icons/fa'
 import { MdOutlineFileCopy } from 'react-icons/md'
 import { toast } from 'react-toastify'
 
-const CardDropdownMenu = (props: LinkDef) => {
+const LinkDropmenu = (props: LinkDef) => {
   const [value, copy] = useCopyToClipboard()
   const queryClient = useQueryClient()
 
@@ -126,4 +126,4 @@ const CardDropdownMenu = (props: LinkDef) => {
   )
 }
 
-export default CardDropdownMenu
+export default LinkDropmenu 

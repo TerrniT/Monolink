@@ -6,8 +6,8 @@ import Image from "next/image";
 import { LinkDef } from "@/types";
 import { FiSearch } from "react-icons/fi"
 // @ts-ignore
-import faviconFetch from 'favicon-fetch'
-import Indicator from "./atoms/indicator";
+import faviconFetch from "favicon-fetch"
+import Indicator from "./atoms/indicator"
 
 interface Props {
   data?: LinkDef[]
@@ -146,7 +146,7 @@ export default function CommandPallete({ data }: Props) {
                   />
 
                   <span className="text-lg font-bold text-zinc-600  mx-auto text-center mb-3 ">
-                    No result's found
+                    No result&aposs found
                   </span>
                 </div>
               )}

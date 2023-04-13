@@ -3,11 +3,11 @@ import Image from 'next/image'
 import { LinkDef } from '@/types'
 // @ts-ignore
 import faviconFetch from 'favicon-fetch'
-import CardDropdownMenu from './CardDropdownMenu'
+import LinkDropmenu from './LinkDropmenu'
 import useOnHover from '@/hooks/useOnHover'
-import Indicator from './atoms/indicator'
+import Indicator from '../atoms/indicator'
 
-const Cardlink = (props: LinkDef) => {
+const LinkCard = (props: LinkDef) => {
   const { isShown, handleMouseEnter, handleMouseOut } = useOnHover()
 
   return (
@@ -39,8 +39,15 @@ const Cardlink = (props: LinkDef) => {
                   />
                 </a>
               </div>
-              <div className="text-md font-bold w-full truncate">{props.title}</div>
-              <CardDropdownMenu {...props} />
+              <div className='flex flex-col w-full'>
+                <div className="text-sm font-bold w-full ">{props.title}</div>
+                {props.tags.tag_name && (
+                  <span className=" px-1 h-3 font-bold w-fit mt-1  py-1 items-center justify-center flex rounded-full text-[10px]" style={{ backgroundColor: `${props.tags.color}` }}>
+                    {props.tags.tag_name}
+                  </span>
+                )}
+              </div>
+              <LinkDropmenu {...props} />
             </div>
           </div>
         </div>
@@ -52,4 +59,4 @@ const Cardlink = (props: LinkDef) => {
   )
 }
 
-export default Cardlink
+export default LinkCard 

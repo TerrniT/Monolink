@@ -9,7 +9,7 @@ const nextConfig = {
 
     return config
   },
-  images: { domains: ['icon.horse.com', 'icon.horse.org', 'icon.horse'] },
+  images: { domains: ['icon.horse.com', 'icon.horse.org', 'icon.horse', 'avatars.githubusercontent.com'] },
   reactStrictMode: false,
 }
 

@@ -7,7 +7,6 @@ import { SubmitHandler, useForm } from "react-hook-form"
 // @ts-ignore-line
 import { CirclePicker } from "react-color"
 import TagInput from './TagInput'
-import { createLink } from '@/service/link.service'
 
 export interface IFormValues {
   id: string
