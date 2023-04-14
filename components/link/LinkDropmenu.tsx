@@ -53,7 +53,7 @@ const LinkDropmenu = (props: LinkDef) => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 mt-2 p-1 gap-1 flex flex-col w-36 origin-top-right  rounded-md bg-black/50 backdrop-blur-xl  ring-1 ring-gray-100 shadow-lg ring-opacity-5 focus:outline-none">
+          <Menu.Items className="absolute right-0 mt-2 p-1 z-30 gap-1 flex flex-col w-36 origin-top-right  rounded-md bg-black/50 backdrop-blur-xl  ring-1 ring-gray-100 shadow-lg ring-opacity-5 focus:outline-none">
             <Menu.Item >
               {({ active }) => (
                 <button

@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect, Fragment, ChangeEvent } from "react";
 import { Dialog, Combobox, Transition } from "@headlessui/react";
 import { useCmdStore } from "../store/store"
 import { AnimatePresence } from "framer-motion";
@@ -14,6 +14,7 @@ interface Props {
 }
 
 export default function CommandPallete({ data }: Props) {
+
   const { open, handleOpen } = useCmdStore((state) => ({
     open: state.open,
     handleOpen: state.setOpen,
@@ -122,9 +123,11 @@ export default function CommandPallete({ data }: Props) {
                               </span>
                             </div>
                             <div>
-                              <span className="text-zinc-200 px-1 mr-2 font-bold py-1 rounded-full text-[12px]" style={{ backgroundColor: `${data.tags.color}` }}>
-                                {data.tags.tag_name}
-                              </span>
+                              {data.tags.tag_name && (
+                                <span className="text-zinc-200 px-2 mr-2 font-bold py-1 rounded-full text-[12px]" style={{ backgroundColor: `${data.tags.color}` }}>
+                                  {data.tags.tag_name}
+                                </span>
+                              )}
                               {active && <Indicator url={data.url} />}
                             </div>
                           </div>

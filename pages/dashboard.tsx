@@ -18,7 +18,6 @@ const Dashboard: FC<DashboardProps> = ({ user }) => {
           <LinkContainer user={user} />
         </div>
       </main>
-
     </div>
   )
 }

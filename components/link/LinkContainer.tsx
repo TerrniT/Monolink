@@ -17,16 +17,15 @@ const LinkContainer = ({ user }: Props) => {
   // @ts-ignore
   const { data, isLoading } = useQuery(['links'], () => getLinks(user.id))
 
-  const { listView, cardView } = useFilterViewStore((state) => ({
+  const { listView } = useFilterViewStore((state) => ({
     listView: state.listView,
-    cardView: state.cardView,
   }))
 
   return (
     <>
       <motion.div className="min-h-screen flex-1 bg-zinc-900 px-3 duration-300  ">
         {listView ? (
-          <div className=" w-full pt-6 grid grid-cols-1 gap-4">
+          <div className=" w-full pt-6 grid grid-cols-1 gap-2">
             {isLoading ? (<SkeletonCardList />) : (<ListView data={data} />)}
           </div>
         ) : (
@@ -34,8 +33,6 @@ const LinkContainer = ({ user }: Props) => {
             {isLoading ? (<SkeletonCardList />) : (<CardView data={data} />)}
           </div>
         )}
-
-
       </motion.div>
       <CommandPallete data={data} />
       <HelpPopover />
