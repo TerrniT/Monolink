@@ -1,7 +1,6 @@
 
-import { supabase } from "@/utils/supabaseClient"
+import { supabase } from "@/supabaseClient"
 import { Provider } from "@supabase/supabase-js"
-import { Router } from "next/router"
 
 
 export const AuthService = {

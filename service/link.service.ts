@@ -1,5 +1,5 @@
 import { LinkDef } from "@/types"
-import { supabase } from "@/utils/supabaseClient"
+import { supabase } from "@/supabaseClient"
 
 export const getLinks = async (userId: string) => {
   try {
