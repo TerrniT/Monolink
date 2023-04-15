@@ -3,7 +3,7 @@ import Login from "@/pages/login";
 import { TypeComponentAuthFields } from "@/types/page.interface";
 
 import { Session } from "@supabase/supabase-js";
-import { createContext, FC, Dispatch, SetStateAction, PropsWithChildren } from "react";
+import { createContext, FC, PropsWithChildren } from "react";
 
 export type TypeUser = null | { name: string }
 
@@ -17,9 +17,11 @@ export const AuthContext = createContext<TypeContext>({
 
 export const AuthProvider: FC<PropsWithChildren<TypeComponentAuthFields>> = ({ children, Component: { isOnlyUser } }) => {
 
-  const { session, isLoading } = useSession()
+  // TODO Re-write auth
+  const { data } = useSession()
 
-  if (isOnlyUser && !session?.user) return <Login />
+  if (isOnlyUser && !data?.session?.user) return <Login />
+  const session = data?.session
 
   return (
     <AuthContext.Provider value={{ session }}>
