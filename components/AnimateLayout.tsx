@@ -5,7 +5,7 @@ type Props = {
   children: React.ReactNode
 }
 
-const Layout = ({ children }: Props) => {
+const AnimateLayout = ({ children }: Props) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -22,4 +22,4 @@ const Layout = ({ children }: Props) => {
   )
 }
 
-export default Layout
+export default AnimateLayout 

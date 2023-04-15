@@ -1,7 +1,6 @@
 import React from "react"
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
-import { IconType } from "react-icons/lib"
 import { ReactSVG } from "react-svg"
 import { AiOutlineLoading } from "react-icons/ai"
 

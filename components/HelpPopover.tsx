@@ -7,7 +7,7 @@ import { FaUserPlus } from 'react-icons/fa'
 const HelpPopover = () => {
   return (
     <Popover className="z-50 hidden lg:block md:block shadow-md ">
-      <Popover.Button className='flex text-sm duration-150 transition-all fixed bottom-8 right-8 px-4 py-2 bg-zinc-800/20 ring-1 ring-zinc-800 hover:ring-zinc-600 hover:text-gray-400 items-center justify-start gap-1 text-zinc-500 rounded-lg' ><MdHelpOutline />
+      <Popover.Button className='flex text-sm duration-150 transition-all px-4 py-2 bg-zinc-800/20 ring-1 ring-zinc-800 hover:ring-zinc-600 hover:text-gray-400 items-center justify-start gap-1 text-zinc-500 rounded-lg' ><MdHelpOutline />
         Help
       </Popover.Button>
       <Popover.Overlay className="fixed inset-0 bg-black opacity-30" />
@@ -79,7 +79,7 @@ const HelpPopover = () => {
                   <MdNote className='rotate-90' />
                 </div>
                 <div className='flex flex-col gap-1 text-xs leading-3'>
-                  <h3 className='font-medium pl-2'>Create your first note</h3>
+                  <h3 className='font-medium pl-2'>Create your first cardlink</h3>
                 </div>
               </Link>
 
@@ -121,11 +121,11 @@ const HelpPopover = () => {
           </div>
           <div className='mt-4 h-[1px] bg-zinc-700 w-full'></div>
           <div className='px-4 py-4 flex flex-col gap-1'>
-            <Link href="/" className='flex gap-2 items-center hover:text-gray-200'>
+            <Link href="/help" className='flex gap-2 items-center hover:text-gray-200'>
               <MdLiveHelp />
               <p className='text-xs '>Help center</p>
             </Link>
-            <Link href="/" className='flex gap-2 items-center hover:text-gray-200'>
+            <Link href="/settings" className='flex gap-2 items-center hover:text-gray-200'>
               <MdKeyboardHide />
               <p className='text-xs'>Keyboard shortcuts</p>
             </Link>

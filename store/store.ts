@@ -18,6 +18,12 @@ interface FilterViewState {
   setCardView: () => void
 }
 
+interface LinkCounterState {
+  counter: number | undefined
+  setCounter: (payload: number | undefined) => void
+}
+
+
 
 export const useCmdStore = create<CmdState>()(
   devtools(
@@ -61,3 +67,17 @@ export const useFilterViewStore = create(
     }
   )
 )
+
+
+export const useCounterStore = create(
+  devtools(
+    persist<LinkCounterState>((set) => ({
+      counter: 0,
+      setCounter: (payload) => set((state) => ({ counter: payload }))
+    }),
+      {
+        name: 'counter-key',
+        getStorage: () => localStorage
+      })
+  )
+);
