@@ -1,10 +1,13 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { FaEdit } from 'react-icons/fa'
-import { BsPlus } from 'react-icons/bs'
+import { BsCardText, BsPlus } from 'react-icons/bs'
 import { useModalStore } from '@/store/store'
 import { motion } from "framer-motion"
 import { AnimationControls } from 'framer-motion'
+import { MdGroup } from 'react-icons/md'
+import { IoCard, IoCardOutline } from 'react-icons/io5'
+import { AiOutlineGroup } from 'react-icons/ai'
 
 interface Props {
   controlTitleText: AnimationControls
@@ -41,17 +44,17 @@ const CreateDropdownMenu = ({ controlTitleText }: Props) => {
             {({ active }) => (
               <button
                 onClick={setOpen}
-                className={`${active ? 'bg-zinc-800 text-white' : 'text-gray-300'
+                className={`${active ? 'bg-zinc-800 text-white rounded-md' : 'text-gray-300'
                   } group flex w-full items-center  px-2 py-2 text-xs`}
               >
                 {active ? (
-                  <FaEdit
-                    className="mr-2 h-5 w-5 "
+                  <BsCardText
+                    className="mr-2 h-4 w-4 "
                     aria-hidden="true"
                   />
                 ) : (
-                  <FaEdit
-                    className="mr-2 h-5 w-5"
+                  <BsCardText
+                    className="mr-2 h-4 w-4"
                     aria-hidden="true"
                   />
                 )}
@@ -63,17 +66,17 @@ const CreateDropdownMenu = ({ controlTitleText }: Props) => {
             {({ active }) => (
               <button
                 onClick={setOpen}
-                className={`${active ? 'bg-zinc-800 text-white' : 'text-gray-300'
+                className={`${active ? 'bg-zinc-800 text-white rounded-md' : 'text-gray-300'
                   } group flex w-full items-center  px-2 py-2 text-xs`}
               >
                 {active ? (
-                  <FaEdit
-                    className="mr-2 h-5 w-5 "
+                  <AiOutlineGroup
+                    className="mr-2 h-4 w-4 "
                     aria-hidden="true"
                   />
                 ) : (
-                  <FaEdit
-                    className="mr-2 h-5 w-5"
+                  <AiOutlineGroup
+                    className="mr-2 h-4 w-4"
                     aria-hidden="true"
                   />
                 )}
@@ -82,27 +85,6 @@ const CreateDropdownMenu = ({ controlTitleText }: Props) => {
             )}
           </Menu.Item>
 
-          <Menu.Item>
-            {({ active }) => (
-              <button
-                className={`${active ? 'bg-zinc-800 text-white' : 'text-gray-300'
-                  } group flex w-full items-center  px-2 py-2 text-xs`}
-              >
-                {active ? (
-                  <FaEdit
-                    className="mr-2 h-5 w-5 "
-                    aria-hidden="true"
-                  />
-                ) : (
-                  <FaEdit
-                    className="mr-2 h-5 w-5"
-                    aria-hidden="true"
-                  />
-                )}
-                Member
-              </button>
-            )}
-          </Menu.Item>
         </Menu.Items>
       </Transition>
     </Menu>

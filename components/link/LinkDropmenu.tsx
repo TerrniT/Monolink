@@ -59,16 +59,16 @@ const LinkDropmenu = (props: LinkDef) => {
                 <button
                   onClick={() => copy(props.url)}
                   className={`${active ? 'bg-zinc-800 rounded-t text-white' : 'text-gray-300'
-                    } flex w-full transition-all duration-200 items-center px-2 py-2 text-xs self-center`}
+                    } flex w-full transition-all duration-200 items-center px-1 py-1  text-[13px] self-center`}
                 >
                   {active ? (
                     <MdOutlineFileCopy
-                      className="mr-2 h-5 w-5"
+                      className="mr-2 h-3 w-3"
                       aria-hidden="true"
                     />
                   ) : (
                     <MdOutlineFileCopy
-                      className="mr-2 h-5 w-5"
+                      className="mr-2 h-3 w-3"
                       aria-hidden="true"
                     />
                   )}
@@ -80,16 +80,16 @@ const LinkDropmenu = (props: LinkDef) => {
               {({ active }) => (
                 <button
                   className={`${active ? 'bg-zinc-800 text-white' : 'text-gray-300'
-                    }  flex w-full items-center px-2 py-2 text-xs `}
+                    }  flex w-full items-center px-1 py-1  text-[13px]`}
                 >
                   {active ? (
                     <FaEdit
-                      className="mr-2 h-5 w-5 "
+                      className="mr-2 h-3 w-3 "
                       aria-hidden="true"
                     />
                   ) : (
                     <FaEdit
-                      className="mr-2 h-5 w-5"
+                      className="mr-2 h-3 w-3"
                       aria-hidden="true"
                     />
                   )}
@@ -102,16 +102,16 @@ const LinkDropmenu = (props: LinkDef) => {
                 <button
                   onClick={handleDelete}
                   className={`${active ? 'bg-red-500/10' : ''
-                    } group flex w-full items-center rounded-b px-2 py-2 text-xs text-red-500 `}
+                    } group flex w-full items-center rounded-b px-1 py-1 text-[13px] text-red-500 `}
                 >
                   {active ? (
                     <AiFillDelete
-                      className="mr-2 h-5 w-5 text-red-500"
+                      className="mr-2 h-3 w-3 text-red-500"
                       aria-hidden="true"
                     />
                   ) : (
                     <AiFillDelete
-                      className="mr-2 h-5 w-5 text-red-500"
+                      className="mr-2 h-3 w-3 text-red-500"
                       aria-hidden="true"
                     />
                   )}

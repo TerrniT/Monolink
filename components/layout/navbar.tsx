@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from "framer-motion"
-import ViewFilters from './ViewFilters'
+import ViewFilters from '../ViewFilters'
 
 
 const Navbar = () => {

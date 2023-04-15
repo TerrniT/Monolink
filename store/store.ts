@@ -59,6 +59,5 @@ export const useFilterViewStore = create(
       name: 'filter-key',
       getStorage: () => localStorage
     }
-
   )
 )

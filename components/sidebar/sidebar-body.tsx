@@ -1,10 +1,10 @@
 import React from 'react'
 import { motion, AnimationControls } from 'framer-motion'
 import Divider from '../atoms/divider'
-import CommandButton from '../atoms/sidebar-atoms/CommandButton'
 import { FiLink, FiSearch } from 'react-icons/fi'
 import { data } from '@/utils/data'
 import CreateDropdownMenu from '../CreateDropdownMenu'
+import CommandButton from './atoms/CommandButton'
 
 type Props = {
   active: boolean
@@ -12,7 +12,7 @@ type Props = {
   controlTitleText: AnimationControls
 }
 
-const DashboardBody = ({ active, controls, controlTitleText }: Props) => {
+const SidebarBody = ({ active, controls, controlTitleText }: Props) => {
   return (
     <div className="mt-2">
       <Divider active={active} />
@@ -39,4 +39,4 @@ const DashboardBody = ({ active, controls, controlTitleText }: Props) => {
   )
 }
 
-export default DashboardBody
+export default SidebarBody

@@ -6,7 +6,7 @@ type Props = {
   controlText: AnimationControls
 }
 
-const DashboardHeader = ({ controlText }: Props) => {
+const SidebarHeader = ({ controlText }: Props) => {
   return (
     <div className="flex ">
       <div className="flex h-10 w-10 items-center justify-center rounded-[10px] border border-gray-600">
@@ -35,4 +35,4 @@ const DashboardHeader = ({ controlText }: Props) => {
   )
 }
 
-export default DashboardHeader
+export default SidebarHeader 

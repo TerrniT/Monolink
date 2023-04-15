@@ -1,8 +1,8 @@
 import LinkContainer from '@/components/link/LinkContainer'
 import { User } from '@supabase/supabase-js'
-import Sidebar from '@/components/Sidebar'
-import { FC } from 'react'
-import { Navbar } from '@/components'
+import Sidebar from '@/components/layout/Sidebar'
+import Navbar from '@/components/layout/navbar'
+import { FC } from "react"
 
 interface DashboardProps {
   user: User | undefined
