@@ -36,9 +36,13 @@ const Button: React.FC<ButtonProps> = ({ className, icon, title, isLoading, ...p
       )}
       {...props}
     >
-      {icon && <Icon iconName={icon} />}
+      {icon &&
+        <div className="mr-2">
+          <Icon iconName={icon} />
+        </div>
+      }
       {isLoading ? <AiOutlineLoading /> : (
-        <p className='pl-2 mx-auto'>{title}</p>
+        <p className='mx-auto'>{title}</p>
       )}
     </button>
   )
