@@ -10,7 +10,10 @@ const SettingsAccount = () => {
   const navigate = useRouter()
 
   const handleSignOut = () => {
-    AuthService.signOut().then(() => navigate.push("/login"))
+    AuthService.signOut()
+
+    navigate.push("/")
+
   }
 
   return (
@@ -19,7 +22,7 @@ const SettingsAccount = () => {
         <div className="flex pb-8 items-center rounded-sm border-b-2 border-b-zinc-700 w-full"  >
           <div className="flex h-18 w-18 ml-1 items-center justify-center rounded-full ring ring-gray-800">
             <Image
-              src={session.session?.user.user_metadata.avatar_url}
+              src="profile image"
               alt="profile picture"
               width={100}
               height={100}

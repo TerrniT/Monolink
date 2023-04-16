@@ -25,6 +25,9 @@ const LinkContainer = ({ user }: Props) => {
   }))
 
   useEffect(() => {
+    if (!user?.id) {
+      console.log("lmao")
+    }
     if (data?.length) {
       setCounter(data?.length)
     }
