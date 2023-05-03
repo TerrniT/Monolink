@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AddLink } from '@/components'
 import { useSession } from "@/hooks/"
 import Loading from './loading';
+import Layout from '@/components/layout/layout';
 
 
 const Home: NextPage = () => {
@@ -14,7 +15,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (!data && !isLoading) {
-      router.push("/")
+      router.push("/login")
     }
   }, [])
 

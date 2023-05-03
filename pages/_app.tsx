@@ -16,22 +16,22 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
   const [supabaseClient] = useState(() => createBrowserSupabaseClient())
 
   const queryClient = new QueryClient()
+  console.log(supabaseClient);
+
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SessionContextProvider supabaseClient={supabaseClient}>
-        <Layout>
-          <AnimatePresence mode="wait" initial={false}>
-            <Component {...pageProps} />
-          </AnimatePresence>
-        </Layout>
-        <ToastContainer
-          toastClassName={(type) => contextClass[type?.type || "default"] +
-            " relative flex  p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer"
-          }
-          bodyClassName={() => "text-sm flex font-md block p-3"}
-        />
-      </SessionContextProvider>
+      <Layout>
+        <AnimatePresence mode="wait" initial={false}>
+          <Component {...pageProps} />
+        </AnimatePresence>
+      </Layout>
+      <ToastContainer
+        toastClassName={(type) => contextClass[type?.type || "default"] +
+          " relative flex  p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer"
+        }
+        bodyClassName={() => "text-sm flex font-md block p-3"}
+      />
     </QueryClientProvider>
   )
 }

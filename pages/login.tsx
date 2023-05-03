@@ -57,9 +57,8 @@ const Login = () => {
               <p className='text-gray-500 uppercase font-medium px-2'>or</p>
               <div className='h-[1px] w-full bg-gray-stroke'></div>
             </div>
-            {/* <Button title="Sign in with Metamask" icon="metamask" className='bg-transparent border-[1px] border-gray-stroke text-xs text-white font-normal p-2 mb-3 ' /> */}
             <Button title="Sign in with Github" icon="github" className='bg-transparent border-[1px] border-gray-stroke text-xs text-white font-normal p-2 mb-3' onClick={() => handleClick("github")} />
-            {/* <Button title="Sign in with Google" icon="google" className='bg-transparent border-[1px] border-gray-stroke text-xs text-white font-normal p-2 mb-3' onClick={() => handleClick("google")} /> */}
+            <Button title="Sign in with Google" icon="google" className='bg-transparent border-[1px] border-gray-stroke text-xs text-white font-normal p-2 mb-3' onClick={() => handleClick("google")} />
             <Link href="/signup" className='hover:text-accent-green-second text-accent-green text-xs self-center transition-all duration-200'>
               New to Monolink? Sign Up
             </Link>

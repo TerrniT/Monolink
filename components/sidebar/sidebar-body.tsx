@@ -27,7 +27,7 @@ const SidebarBody = ({ active, controls, controlTitleText }: Props) => {
         controls={controls}
         onClick={() => navigate.push("/")}
       >
-        <LinkCounter />
+        <LinkCounter isShow={active} />
       </CommandButton>
       <CommandButton title='Search' icon={<FiSearch className='w-10 text-md' />} command="K" controlTitleText={controlTitleText} controls={controls} />
       {data.map((item, index) => (

@@ -22,9 +22,13 @@ export default function CommandPallete({ data }: Props) {
 
   const [query, setQuery] = useState<string>("");
 
+  const search = (data: LinkDef[]) => {
+    return data.filter(item => item.title.toLowerCase().includes(query))
+  }
+
   useEffect(() => {
     function onKeydown(event: any) {
-      if (event.key === "k" && (event.metaKey || event.ctrlKey)) {
+      if (event.key === ";" && (event.metaKey || event.ctrlKey)) {
         handleOpen();
       }
     }
@@ -86,7 +90,7 @@ export default function CommandPallete({ data }: Props) {
               {/* TODO: Rewrite filter-function (name -> title by type Library) */}
               {data && data.length > 0 ? (
                 <Combobox.Options className=" scrollbar scrollbar-thumb-zinc-700  py-4 text-sm max-h-96 overflow-y-auto ">
-                  {data.map((data) => (
+                  {search(data).map((data) => (
                     <Combobox.Option
                       className="px-2 my-2"
                       key={data.id}
