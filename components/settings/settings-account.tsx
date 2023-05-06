@@ -21,13 +21,17 @@ const SettingsAccount = () => {
       {session ? (
         <div className="flex pb-8 items-center rounded-sm border-b-2 border-b-zinc-700 w-full"  >
           <div className="flex h-14 w-14 ml-1 mr-3 items-center justify-center rounded-full ring ring-gray-800">
-            <Image
-              src={session.session?.user.user_metadata.avatar_url}
-              alt="profile picture"
-              width={100}
-              height={100}
-              className="rounded-full"
-            />
+            {session.session?.user.user_metadata.avatar_url ? (
+              <Image
+                src={session.session?.user.user_metadata.avatar_url}
+                alt="a"
+                width={100}
+                height={100}
+                className="rounded-full"
+              />
+            ) : (
+              null
+            )}
           </div>
           <div className='flex flex-col ml-1 '>
             <div className="flex items-center">

@@ -17,13 +17,23 @@ const Profile = ({ controls, controlTitleText }: Props) => {
       {session ? (
         <motion.div className="flex gap-2 my-2" animate={controls} >
           <div className="flex h-8 w-8 ml-1 items-center justify-center rounded-full ring ring-gray-800">
-            <Image
-              src={session.session?.user.user_metadata.avatar_url}
-              alt="profile picture"
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
+            {session.session?.user.user_metadata.avatar_url ? (
+              <Image
+                src={session.session?.user.user_metadata.avatar_url}
+                alt="a"
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+            ) : (
+              <Image
+                src="../assets/metamask.svg"
+                alt="a"
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+            )}
           </div>
           <div className='flex flex-col ml-1'>
             <div className="flex items-center justify-center">

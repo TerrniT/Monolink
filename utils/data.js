@@ -4,7 +4,7 @@ export const data = [
   {
     title: 'Updates & FAQ',
     icon: IoFileTrayStackedOutline,
-    navigate: "/updates"
+    navigate: "/"
   },
   {
     title: 'Settings',

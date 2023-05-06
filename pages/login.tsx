@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '@/components/atoms/button'
 import Link from 'next/link'
 import { Provider } from "@supabase/supabase-js"
 import { AuthService } from '@/service/auth.service'
-import { useLogin } from '@/hooks/'
+import { useLogin, useSession } from '@/hooks/'
 import { useRouter } from 'next/router'
 
 const Login = () => {
@@ -12,6 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState<string>("")
 
   const { mutate, isLoading } = useLogin(password, email)
+  const { userId } = useSession()
 
   const handleLogin = async (email: string, password: string) => {
     mutate({ email, password })
@@ -21,6 +22,13 @@ const Login = () => {
   const handleClick = (provider: Provider) => {
     AuthService.signInWithOAuth(provider)
   }
+
+  useEffect(() => {
+    if (userId) {
+      navigate.push('/')
+      console.log("hello")
+    }
+  }, [userId])
 
   return (
     <div className="flex h-screen w-full items-center justify-center bg-black">
@@ -58,7 +66,6 @@ const Login = () => {
               <div className='h-[1px] w-full bg-gray-stroke'></div>
             </div>
             <Button title="Sign in with Github" icon="github" className='bg-transparent border-[1px] border-gray-stroke text-xs text-white font-normal p-2 mb-3' onClick={() => handleClick("github")} />
-            <Button title="Sign in with Google" icon="google" className='bg-transparent border-[1px] border-gray-stroke text-xs text-white font-normal p-2 mb-3' onClick={() => handleClick("google")} />
             <Link href="/signup" className='hover:text-accent-green-second text-accent-green text-xs self-center transition-all duration-200'>
               New to Monolink? Sign Up
             </Link>
