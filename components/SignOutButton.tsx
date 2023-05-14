@@ -1,9 +1,9 @@
-import { AuthService } from '@/service/auth.service'
+import { signOut } from '@/service/auth.service'
 
 const SignOut = () => {
 
   const handleSubmit = async () => {
-    AuthService.signOut()
+    signOut()
   }
 
   return (

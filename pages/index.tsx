@@ -1,35 +1,28 @@
-import { NextPage } from 'next'
+import { SignOutButton } from '@/components'
+import { useSession } from '@/hooks'
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
 import Dashboard from './dashboard'
-import 'react-toastify/dist/ReactToastify.css';
-import { AddLink } from '@/components'
-import { useSession } from "@/hooks/"
-import Loading from './loading';
-import Layout from '@/components/layout/layout';
+import Loading from './loading'
+import Signin from './signin'
 
-
-const Home: NextPage = () => {
+export default function Home() {
+  const { data: session, isLoading } = useSession()
   const router = useRouter()
-  const { data, isLoading } = useSession()
 
-  useEffect(() => {
-    if (!data && !isLoading) {
-      router.push("/login")
-    }
-  }, [])
-
-  if (isLoading) {
+  if (!session && isLoading) {
     return <Loading />
   }
 
-
   return (
-    <div className="mx-auto flex h-screen w-full ">
-      <Dashboard user={data?.session?.user} />
-      <AddLink />
-    </div>
+    <>
+      {
+        session?.session == null ? (
+          <Signin />
+        ) : (
+          <Dashboard />
+        )
+      }
+    </>
   )
 }
 
-export default Home 

@@ -3,6 +3,7 @@ import Button from '@/components/atoms/button'
 import Link from 'next/link'
 import { toast } from 'react-toastify'
 import { useSignUp } from '@/hooks/'
+import LoginLayout from '@/components/layout/LoginLayout'
 
 const SignUp = () => {
   const [email, setEmail] = useState<string>('')
@@ -73,5 +74,7 @@ const SignUp = () => {
     </div>
   )
 }
+
+SignUp.PageLayout = LoginLayout
 
 export default SignUp 

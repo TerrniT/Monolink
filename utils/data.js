@@ -9,7 +9,7 @@ export const data = [
   {
     title: 'Settings',
     icon: IoSettingsSharp,
-    navigate: "/settings"
+    navigate: "/dashboard/settings"
   },
 ]
 

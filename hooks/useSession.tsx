@@ -1,4 +1,4 @@
-import { AuthService } from "@/service/auth.service";
+import { getSession } from "@/service/auth.service";
 import { AuthError, Session } from "@supabase/supabase-js";
 import { useQuery } from "@tanstack/react-query";
 
@@ -13,7 +13,7 @@ type UseUserType = {
 
 const useSession = (): UseUserType => {
 
-  const { data, isLoading } = useQuery(['session'], () => AuthService.getSession())
+  const { data, isLoading } = useQuery(['session'], () => getSession())
 
   const userId = data?.session?.user.id
 

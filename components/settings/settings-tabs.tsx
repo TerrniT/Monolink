@@ -15,7 +15,6 @@ const SettingsTabs = () => {
       <Tab.Panels className="flex flex-col w-full">
         <SettingsPanel heading='Account'>
           <SettingsAccount />
-
         </SettingsPanel>
         <SettingsPanel heading='Apperance' />
         <SettingsPanel heading='Api' />

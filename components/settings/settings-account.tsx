@@ -2,7 +2,7 @@ import { useSession } from '@/hooks'
 import React from 'react'
 import Image from 'next/image'
 import { Button } from '../atoms'
-import { AuthService } from '@/service/auth.service'
+import { signOut } from '@/service/auth.service'
 import { useRouter } from 'next/router'
 
 const SettingsAccount = () => {
@@ -10,10 +10,8 @@ const SettingsAccount = () => {
   const navigate = useRouter()
 
   const handleSignOut = () => {
-    AuthService.signOut()
-
-    navigate.push("/")
-
+    signOut()
+    navigate.replace('/signin')
   }
 
   return (

@@ -1,4 +1,4 @@
-import { AuthService } from "@/service/auth.service"
+import { signUpWithMagicLink } from "@/service/auth.service"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { toast } from "react-toastify"
 
@@ -11,7 +11,7 @@ const useSignUp = () => {
 
   const { data: error, isLoading, mutate } = useMutation(['session'],
     {
-      mutationFn: (email: string) => AuthService.signUpWithMagicLink(email),
+      mutationFn: (email: string) => signUpWithMagicLink(email),
       onSuccess: () => {
         toast.success("Check your email", {
           position: "top-center",

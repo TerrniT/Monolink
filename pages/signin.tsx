@@ -1,34 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from '@/components/atoms/button'
 import Link from 'next/link'
 import { Provider } from "@supabase/supabase-js"
-import { AuthService } from '@/service/auth.service'
-import { useLogin, useSession } from '@/hooks/'
+import { signInWithOAuth } from '@/service/auth.service'
+import { useLogin } from '@/hooks/'
 import { useRouter } from 'next/router'
 
-const Login = () => {
-  const navigate = useRouter()
+export default function Signin() {
+  const router = useRouter()
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
 
-  const { mutate, isLoading } = useLogin(password, email)
-  const { userId } = useSession()
+  const { mutate, isLoading, isSuccess } = useLogin(password, email)
 
   const handleLogin = async (email: string, password: string) => {
     mutate({ email, password })
-    navigate.push("/")
   }
 
   const handleClick = (provider: Provider) => {
-    AuthService.signInWithOAuth(provider)
+    signInWithOAuth(provider)
   }
 
   useEffect(() => {
-    if (userId) {
-      navigate.push('/')
-      console.log("hello")
+    if (isSuccess) {
+      router.push("/dashboard")
     }
-  }, [userId])
+  }, [isSuccess])
 
   return (
     <div className="flex h-screen w-full items-center justify-center bg-black">
@@ -76,4 +73,4 @@ const Login = () => {
   )
 }
 
-export default Login
+
