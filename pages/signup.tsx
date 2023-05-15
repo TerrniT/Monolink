@@ -4,6 +4,9 @@ import Link from 'next/link'
 import { toast } from 'react-toastify'
 import { useSignUp } from '@/hooks/'
 import LoginLayout from '@/components/layout/LoginLayout'
+import { signInWithOAuth } from '../service/auth.service'
+
+import { Provider } from "@supabase/supabase-js"
 
 const SignUp = () => {
   const [email, setEmail] = useState<string>('')
@@ -24,7 +27,9 @@ const SignUp = () => {
   const handleInput = (e: any) => {
     e.preventDefault()
     setEmail(e.target.value)
-    console.log(email);
+  }
+  const signUpWithGithub = async (provider: Provider) => {
+    signInWithOAuth(provider)
   }
 
   const handleLogin = async (email: string) => {
@@ -40,7 +45,7 @@ const SignUp = () => {
           <p className="text-p font-normal max-w-sm mt-[28px] w-full text-gray-stroke">Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien.</p>
           <div className='mt-[30px] lg:w-[386px] '>
             <Button title="Sign in with Metamask" icon="metamask" className='bg-transparent border-[1px] border-gray-stroke text-xs text-white font-normal p-2 mb-3' onClick={notify} />
-            <Button title="Sign in with Github" icon="github" className='bg-transparent border-[1px] border-gray-stroke text-xs text-white font-normal p-2 mb-3' onClick={notify} />
+            <Button title="Sign in with Github" icon="github" className='bg-transparent border-[1px] border-gray-stroke text-xs text-white font-normal p-2 mb-3' onClick={() => signUpWithGithub("github")} />
             <Button title="Sign in with Google" icon="google" className='bg-transparent border-[1px] border-gray-stroke text-xs text-white font-normal p-2 mb-3' onClick={() => notify} />
             <div className='flex items-center my-[34px]'>
               <div className='h-[1px] w-full bg-gray-stroke'></div>
@@ -58,7 +63,7 @@ const SignUp = () => {
             <Button title='Login' className='bg-accent-green-second text-p text-black font-medium p-3' onClick={() => handleLogin(email)} isLoading={isLoading} />
             <div className='mt-[30px]'>
               <p className='text-gray-stroke text-xs self-start'> Already have an account
-                <Link href="/login" className='hover:text-accent-green-second text-accent-green text-xs font-medium pl-2 self-center transition-all duration-200'>
+                <Link href="/signin" className='hover:text-accent-green-second text-accent-green text-xs font-medium pl-2 self-center transition-all duration-200'>
                   Login
                 </Link>
               </p>
