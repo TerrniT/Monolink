@@ -11,7 +11,7 @@ const Error = (props: Props) => {
       >
         404 error
       </h1>
-      <h3 className="text-xl font-medium pb-4">Something went wrong, maybe this page don't exist</h3>
+      <h3 className="text-xl font-medium pb-4">Something went wrong, maybe this page don&#39;t exist</h3>
       <Link href="/" className='underline underline-offset-4 hover:underline-offset-8 font-bold hover:font-black text-white hover:text-accent-green self-start'>Go back</Link>
     </div>
   )
