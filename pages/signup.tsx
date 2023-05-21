@@ -5,7 +5,6 @@ import { toast } from 'react-toastify'
 import { useSignUp } from '@/hooks/'
 import LoginLayout from '@/components/layout/LoginLayout'
 import { signInWithOAuth } from '../service/auth.service'
-
 import { Provider } from "@supabase/supabase-js"
 
 const SignUp = () => {
