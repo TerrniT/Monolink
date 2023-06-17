@@ -50,7 +50,7 @@ const AddLink: React.FC = () => {
       };
 
       mutate({
-        data: modifiedOuterObj, userId: userId
+        data: modifiedOuterObj, id: userId
       })
 
       reset()

@@ -10,6 +10,7 @@ type SidebarProps = {
   active: boolean
 }
 
+
 const useSidebar = (): SidebarProps => {
   const controls = useAnimation()
   const controlText = useAnimation()

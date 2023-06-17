@@ -12,12 +12,11 @@ function useCopyToClipboard(): [CopiedValue, CopyFn] {
       console.warn('Clipboard not supported')
       return false
     }
-
     // Try to save to clipboard then save it in the state if worked
     try {
       await navigator.clipboard.writeText(text)
       setCopiedText(text)
-      toast.success('Copy to clipboard', {
+      toast.success('Copied to clipboard', {
         position: "top-center",
         autoClose: 2000,
         hideProgressBar: true,

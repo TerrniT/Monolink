@@ -3,8 +3,6 @@ import { useMutation } from "@tanstack/react-query"
 import { useRouter } from "next/router"
 import { toast } from "react-toastify"
 
-
-
 const useLogin = (email: string, password: string) => {
 
   const router = useRouter()

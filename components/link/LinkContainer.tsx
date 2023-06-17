@@ -17,6 +17,7 @@ const LinkContainer = ({ user }: Props) => {
     setCounter: state.setCounter,
     counter: state.counter
   }))
+
   // @ts-ignore
   const { data, isLoading } = useQuery(['links'], () => getLinks(user.id))
 
@@ -25,9 +26,6 @@ const LinkContainer = ({ user }: Props) => {
   }))
 
   useEffect(() => {
-    if (!user?.id) {
-      console.log("lmao")
-    }
     if (data?.length) {
       setCounter(data?.length)
     }
@@ -36,6 +34,9 @@ const LinkContainer = ({ user }: Props) => {
   return (
     <>
       <motion.div className=" flex-1 bg-zinc-900 px-3 duration-300 h-screen overflow-auto ">
+        {data?.length == 0 && (
+          <div className='mx-auto flex text-center mt-10 ml-10'>No created cards yet</div>
+        )}
         {listView ? (
           <div className=" w-full pt-6 grid grid-cols-1 gap-2">
             {isLoading ? (<SkeletonCardList />) : (<ListView data={data} />)}

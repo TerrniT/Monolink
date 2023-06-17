@@ -1,8 +1,10 @@
 import { useCopyToClipboard } from '@/hooks/'
 import { deleteLink } from '@/service/link.service'
+import { useSpinnerStore } from '@/store/store'
 import { LinkDef } from '@/types'
+import { stableQueryClient } from '@/utils/stable-query-client'
 import { Menu, Transition } from '@headlessui/react'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import { Fragment } from 'react'
 import { AiFillDelete } from 'react-icons/ai'
 import { BsThreeDots } from 'react-icons/bs'
@@ -10,28 +12,52 @@ import { FaEdit } from 'react-icons/fa'
 import { MdOutlineFileCopy } from 'react-icons/md'
 import { toast } from 'react-toastify'
 
+
 const LinkDropmenu = (props: LinkDef) => {
   const [value, copy] = useCopyToClipboard()
-  const queryClient = useQueryClient()
 
-  const { mutate } = useMutation(['links'], () => deleteLink(props.id), {
+  const { mutate, isLoading } = useMutation(async () => deleteLink(props.id), {
+    onSettled: () => {
+      stableQueryClient.invalidateQueries(['links']);
+      setIsLoading(isLoading)
+    },
+    onMutate: () => {
+      setIsLoading(false)
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries()
-    }
+      toast.success('Card succesful deleted!', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      setInterval(() => setIsLoading(false), 1200)
+    },
+    onError: () => {
+      toast("Error", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    },
   })
 
-  const handleDelete = async () => {
+  const { setIsLoading } = useSpinnerStore((state) => ({
+    setIsLoading: state.setIsLoading,
+  }))
+
+  const handleDelete = () => {
     mutate()
-    toast("Success", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
   }
+
 
   return (
     <div className="abosolute top-0 text-right">

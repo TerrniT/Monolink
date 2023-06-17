@@ -12,7 +12,6 @@ type UseUserType = {
 }
 
 const useSession = (): UseUserType => {
-
   const { data, isLoading } = useQuery(['session'], () => getSession())
 
   const userId = data?.session?.user.id

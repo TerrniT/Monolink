@@ -11,6 +11,11 @@ interface CmdState {
   setOpen: () => void
 }
 
+interface SpinnerState {
+  isLoading: boolean
+  setIsLoading: (payload: boolean) => void
+}
+
 interface FilterViewState {
   listView: boolean
   cardView: boolean
@@ -24,7 +29,6 @@ interface LinkCounterState {
 }
 
 
-
 export const useCmdStore = create<CmdState>()(
   devtools(
     persist<CmdState>((set) => ({
@@ -33,6 +37,19 @@ export const useCmdStore = create<CmdState>()(
     }),
       {
         name: 'cmd-key',
+        getStorage: () => localStorage
+      })
+  )
+);
+
+export const useSpinnerStore = create<SpinnerState>()(
+  devtools(
+    persist<SpinnerState>((set) => ({
+      isLoading: false,
+      setIsLoading: (payload) => set((state) => ({ isLoading: payload }))
+    }),
+      {
+        name: 'spinner-key',
         getStorage: () => localStorage
       })
   )

@@ -20,7 +20,7 @@ const LinkCounter = ({ isShow }: Props) => {
 
   return (
     <>
-      {number && isShow && (
+      {number != 1 && number && isShow && (
         <div className='bg-orange-600 rounded text-white text-[11px] py-0.5 px-1 w-fit font-bold mr-2 '>{number}</div>
       )}
     </>

@@ -1,32 +1,21 @@
 import { createLink } from "@/service/link.service"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useSpinnerStore } from "@/store/store"
+import { stableQueryClient } from "@/utils/stable-query-client"
+import { useMutation } from "@tanstack/react-query"
 
-
-interface Props {
-  userId: string
-  title: string
-  desc: string
-  url: string
-  tags: {
-    color: string
-    tag_name: string
-  }
-}
 
 const useAddLink = () => {
+  const { setIsLoading } = useSpinnerStore((state) => ({
+    setIsLoading: state.setIsLoading,
+  }))
 
-  const queryClient = useQueryClient()
-
-  const { mutate, data, error } = useMutation({
+  return useMutation({
     mutationFn: createLink,
     onSettled: () => {
-      queryClient.invalidateQueries(['links']);
+      setIsLoading(false)
+      stableQueryClient.invalidateQueries(['links']);
     },
   })
-
-  return {
-    mutate
-  }
 }
 
 

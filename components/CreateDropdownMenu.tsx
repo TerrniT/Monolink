@@ -1,12 +1,9 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-import { FaEdit } from 'react-icons/fa'
 import { BsCardText, BsPlus } from 'react-icons/bs'
 import { useModalStore } from '@/store/store'
 import { motion } from "framer-motion"
 import { AnimationControls } from 'framer-motion'
-import { MdGroup } from 'react-icons/md'
-import { IoCard, IoCardOutline } from 'react-icons/io5'
 import { AiOutlineGroup } from 'react-icons/ai'
 
 interface Props {
@@ -14,7 +11,6 @@ interface Props {
 }
 
 const CreateDropdownMenu = ({ controlTitleText }: Props) => {
-
   const { open, setOpen } = useModalStore((state) => ({
     open: state.open,
     setOpen: state.setOpen,
